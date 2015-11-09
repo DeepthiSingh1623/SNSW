@@ -29,13 +29,18 @@ import org.testng.Assert;
  */
 public class CreateAccountPage {
     
-    private final String weEmailId = "email";
-    private final String wePasswordId = "password";
-    private final String weTermsAndConditionsId = "tnc";
-    private final String weEmailNotificationId = "emailNotification";
-    private final String weNewsId = "news";
-    private final String weNewsGovernmentId = "newGov";
+    private static final String weEmailId = "email";
+    private static final String wePasswordId = "password";
+    private static final String weTermsAndConditionsId = "tnc";
+    private static final String weEmailNotificationId = "emailNotification";
+    private static final String weNewsId = "news";
+    private static final String weNewsGovernmentId = "newGov";
     private static final String weConfirmPasswordId = "confirmPassword";
+    private static final String weSubmitButtonId = "submitButton";
+    private static final String weEmailTitleXpath = "//span[contains(text(), \"Email address\")][@class='ng-binding ng-scope']";
+    private static final String wePasswordTitleXpath = "//span[contains(text(), \"Password\")][@class='ng-binding ng-scope']";
+    private static final String weConfirmPasswordTitleXpath = "//span[contains(text(), \"Confirm password\")][@class='ng-binding ng-scope']";
+    private static final String weExistsShowPasswordAndConfirmPasswordCheckboxXpath = "//input[@ng-click='togglePasswordVisible($event)']";
     
     
     private final WebDriver driver;
@@ -45,18 +50,18 @@ public class CreateAccountPage {
     }
     
     public void waitForElements(Wait<WebDriver> wait) {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(this.weEmailId)));
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(this.wePasswordId)));
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(this.weConfirmPasswordId)));
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(this.weTermsAndConditionsId)));
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("emailNotification")));
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(this.weNewsId)));
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(this.weNewsGovernmentId)));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(CreateAccountPage.weEmailId)));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(CreateAccountPage.wePasswordId)));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(CreateAccountPage.weConfirmPasswordId)));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(CreateAccountPage.weTermsAndConditionsId)));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(CreateAccountPage.weEmailNotificationId)));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(CreateAccountPage.weNewsId)));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(CreateAccountPage.weNewsGovernmentId)));
     }
     
     public boolean existsEmailTitle() {
         try {
-            this.driver.findElement(By.xpath("//span[contains(text(), \"Email address\")][@class='ng-binding ng-scope']"));
+            this.driver.findElement(By.xpath(CreateAccountPage.weEmailTitleXpath));
             return true;
         } catch (NoSuchElementException e) {
             System.out.println(e.getStackTrace());
@@ -66,7 +71,7 @@ public class CreateAccountPage {
     
     public boolean existsEmailInput() {
         try {
-            this.driver.findElement(By.id(this.weEmailId));
+            this.driver.findElement(By.id(CreateAccountPage.weEmailId));
             return true;
         } catch (NoSuchElementException e) {
             return false;
@@ -75,7 +80,7 @@ public class CreateAccountPage {
     
     public boolean existsPasswordTitle() {
         try {
-            this.driver.findElement(By.xpath("//span[contains(text(), \"Password\")][@class='ng-binding ng-scope']"));
+            this.driver.findElement(By.xpath(CreateAccountPage.wePasswordTitleXpath));
             return true;
         } catch (NoSuchElementException e) {
             System.out.println(e.getStackTrace());
@@ -85,7 +90,7 @@ public class CreateAccountPage {
     
     public boolean existsPasswordInput() {
         try {
-            this.driver.findElement(By.id(this.wePasswordId));
+            this.driver.findElement(By.id(CreateAccountPage.wePasswordId));
             return true;
         } catch (NoSuchElementException e) {
             return false;
@@ -94,7 +99,7 @@ public class CreateAccountPage {
     
     public boolean existsShowPasswordAndConfirmPasswordCheckbox() {
         try {
-            List<WebElement> elements = this.driver.findElements(By.xpath("//input[@ng-click='togglePasswordVisible($event)']"));
+            List<WebElement> elements = this.driver.findElements(By.xpath(CreateAccountPage.weExistsShowPasswordAndConfirmPasswordCheckboxXpath));
             return elements.size() == 2;
         } catch (NoSuchElementException e) {
             System.out.println(e.getStackTrace());
@@ -104,7 +109,7 @@ public class CreateAccountPage {
 
     public boolean existsConfirmPasswordTitle() {
         try {
-            this.driver.findElement(By.xpath("//span[contains(text(), \"Confirm password\")][@class='ng-binding ng-scope']"));
+            this.driver.findElement(By.xpath(CreateAccountPage.weConfirmPasswordTitleXpath));
             return true;
         } catch (NoSuchElementException e) {
             System.out.println(e.getStackTrace());
@@ -114,7 +119,7 @@ public class CreateAccountPage {
     
     public boolean existsConfirmPasswordInput() {
         try {
-            this.driver.findElement(By.id(this.weConfirmPasswordId));
+            this.driver.findElement(By.id(CreateAccountPage.weConfirmPasswordId));
             return true;
         } catch (NoSuchElementException e) {
             return false;
@@ -123,7 +128,7 @@ public class CreateAccountPage {
     
     public boolean existsTermsAndConditionsCheckbox() {
         try {
-            this.driver.findElement(By.id(this.weTermsAndConditionsId));
+            this.driver.findElement(By.id(CreateAccountPage.weTermsAndConditionsId));
             return true;
         } catch (NoSuchElementException e) {
             return false;
@@ -132,7 +137,7 @@ public class CreateAccountPage {
     
     public boolean existsEmailNotificationCheckbox() {
         try {
-            this.driver.findElement(By.id(this.weEmailNotificationId));
+            this.driver.findElement(By.id(CreateAccountPage.weEmailNotificationId));
             return true;
         } catch (NoSuchElementException e) {
             return false;
@@ -141,7 +146,7 @@ public class CreateAccountPage {
     
     public boolean existsNewsCheckbox() {
         try {
-            this.driver.findElement(By.id(this.weNewsId));
+            this.driver.findElement(By.id(CreateAccountPage.weNewsId));
             return true;
         } catch (NoSuchElementException e) {
             return false;
@@ -150,7 +155,7 @@ public class CreateAccountPage {
     
     public boolean existsNewsGovernmentCheckbox() {
         try {
-            this.driver.findElement(By.id(this.weNewsGovernmentId));
+            this.driver.findElement(By.id(CreateAccountPage.weNewsGovernmentId));
             return true;
         } catch (NoSuchElementException e) {
             return false;
@@ -161,22 +166,22 @@ public class CreateAccountPage {
     
     
     public void setEmail(String email) {
-        WebElement a = this.driver.findElement(By.id(this.weEmailId));
+        WebElement a = this.driver.findElement(By.id(CreateAccountPage.weEmailId));
         a.sendKeys(email);
     }
     
     public void setPassword(String password) {
-        WebElement a = this.driver.findElement(By.id(this.wePasswordId));
+        WebElement a = this.driver.findElement(By.id(CreateAccountPage.wePasswordId));
         a.sendKeys(password);
     }
     
     public void setConfirmPassword(String confirmPassword) {
-        WebElement a = this.driver.findElement(By.id(this.weConfirmPasswordId));
+        WebElement a = this.driver.findElement(By.id(CreateAccountPage.weConfirmPasswordId));
         a.sendKeys(confirmPassword);
     }
     
     public void setTermsAndConditions(boolean checked) {
-        WebElement a = this.driver.findElement(By.id(this.weTermsAndConditionsId));
+        WebElement a = this.driver.findElement(By.id(CreateAccountPage.weTermsAndConditionsId));
         boolean status = a.isSelected();
         
         if (status != checked) {
@@ -185,7 +190,7 @@ public class CreateAccountPage {
     }
     
     public void setEmailNotification(boolean checked) {
-        WebElement a = this.driver.findElement(By.id("emailNotification"));
+        WebElement a = this.driver.findElement(By.id(CreateAccountPage.weEmailNotificationId));
         boolean status = a.isSelected();
         
         if (status != checked) {
@@ -194,7 +199,7 @@ public class CreateAccountPage {
     }
     
     public void setNews(boolean checked) {
-        WebElement a = this.driver.findElement(By.id(this.weNewsId));
+        WebElement a = this.driver.findElement(By.id(CreateAccountPage.weNewsId));
         boolean status = a.isSelected();
         
         if (status != checked) {
@@ -203,7 +208,7 @@ public class CreateAccountPage {
     }
     
     public void setNewGovernment(boolean checked) {
-        WebElement a = this.driver.findElement(By.id(this.weNewsGovernmentId));
+        WebElement a = this.driver.findElement(By.id(CreateAccountPage.weNewsGovernmentId));
         boolean status = a.isSelected();
         
         if (status != checked) {
@@ -212,7 +217,7 @@ public class CreateAccountPage {
     }
     
     public void pressRegisterAccountButton() {
-        WebElement a = this.driver.findElement(By.id("submitButton"));
+        WebElement a = this.driver.findElement(By.id(CreateAccountPage.weSubmitButtonId));
         if(a.isEnabled()) {
             a.click();
         } else {
