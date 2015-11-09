@@ -35,6 +35,7 @@ public class CreateAccountPage {
     private final String weEmailNotificationId = "emailNotification";
     private final String weNewsId = "news";
     private final String weNewsGovernmentId = "newGov";
+    private static final String weConfirmPasswordId = "confirmPassword";
     
     
     private final WebDriver driver;
@@ -46,7 +47,7 @@ public class CreateAccountPage {
     public void waitForElements(Wait<WebDriver> wait) {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(this.weEmailId)));
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(this.wePasswordId)));
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("confirmPassword")));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(this.weConfirmPasswordId)));
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(this.weTermsAndConditionsId)));
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("emailNotification")));
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(this.weNewsId)));
@@ -113,7 +114,7 @@ public class CreateAccountPage {
     
     public boolean existsConfirmPasswordInput() {
         try {
-            this.driver.findElement(By.id("confirmPassword"));
+            this.driver.findElement(By.id(this.weConfirmPasswordId));
             return true;
         } catch (NoSuchElementException e) {
             return false;
@@ -170,7 +171,7 @@ public class CreateAccountPage {
     }
     
     public void setConfirmPassword(String confirmPassword) {
-        WebElement a = this.driver.findElement(By.id("confirmPassword"));
+        WebElement a = this.driver.findElement(By.id(this.weConfirmPasswordId));
         a.sendKeys(confirmPassword);
     }
     
