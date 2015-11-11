@@ -62,34 +62,6 @@ public class SNSWSeleniumTests {
     public void tearDown() {
     }
 
-    // TODO add test methods here.
-    // The methods must be annotated with annotation @Test. For example:
-    //
-    // @Test
-    // public void hello() {}
-    //@Ignore("Test is ignored on purpose while building more tests")
-    @Test
-    public void checkForErrorMessages() {
-        driver = new FirefoxDriver();
-        wdwait = new WebDriverWait(driver, 30);
-
-        driver.get(env.getCreateAccountURL());
-        System.out.println("Base Window Handle: " + driver.getWindowHandle());
-
-        CreateAccountPage cap = new CreateAccountPage(driver);
-        cap.waitForElements(wdwait);
-        cap.pressRegisterAccountButton();
-        if (!cap.checkForError("Please check the following", "Please check the following 4 errors:")) {
-            Assert.fail("The error message did not match");
-        }
-        ArrayList<String> errorMessages = new ArrayList<>();
-        errorMessages.add("Email Address: Invalid email address. Please enter an email address using the format example@email.com");
-        errorMessages.add("Password: Please fill out this field.");
-        errorMessages.add("Confirm Password: Please fill out this field.");
-        errorMessages.add("Terms and Conditions: Please accept the Terms and Conditions to continue.");
-        cap.numberForErrorsDisplayed(errorMessages);
-        driver.close();
-    }
     
     
     //@Ignore("Test is ignored on purpose while building more tests")

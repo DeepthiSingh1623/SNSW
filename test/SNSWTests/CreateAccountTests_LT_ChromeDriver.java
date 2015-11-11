@@ -5,11 +5,9 @@
  */
 package SNSWTests;
 
-import static SNSWTests.SNSWSeleniumTests.driver;
-import static SNSWTests.SNSWSeleniumTests.env;
-import SNSWWebPages.CreateAccountPage;
+import static SNSWTests.CreateAccountTests_LT_FirefoxDriver.driver;
+import static SNSWTests.CreateAccountTests_LT_FirefoxDriver.env;
 import TestHelpers.Environment;
-import java.util.ArrayList;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -17,16 +15,16 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
 
 /**
  *
  * @author Kurt
  */
-public class CreateAccountTests_LT_FirefoxDriver {
+public class CreateAccountTests_LT_ChromeDriver {
     
     
     static WebDriver driver;
@@ -35,7 +33,7 @@ public class CreateAccountTests_LT_FirefoxDriver {
 
     
     
-    public CreateAccountTests_LT_FirefoxDriver() {
+    public CreateAccountTests_LT_ChromeDriver() {
     }
     
     @BeforeClass
@@ -55,13 +53,15 @@ public class CreateAccountTests_LT_FirefoxDriver {
     public void tearDown() {
     }
 
+
     
     
     
     //@Ignore("Test is ignored on purpose while building more tests")
     @Test
     public void checkForErrorMessages() {
-        driver = new FirefoxDriver();
+        System.setProperty("webdriver.chrome.driver", "./lib/chromedriver.exe");
+        driver = new ChromeDriver();
         wdwait = new WebDriverWait(driver, 60);
 
         CreateAccountTests.checkForErrorMessages(driver, wdwait, env);
@@ -71,7 +71,8 @@ public class CreateAccountTests_LT_FirefoxDriver {
     //@Ignore("Test is ignored on purpose while building more tests")
     @Test
     public void verifyTCMandatory() {
-        driver = new FirefoxDriver();
+        System.setProperty("webdriver.chrome.driver", "./lib/chromedriver.exe");
+        driver = new ChromeDriver();
         wdwait = new WebDriverWait(driver, 60);
 
         CreateAccountTests.verifyTCMandatory(driver, wdwait, env);
