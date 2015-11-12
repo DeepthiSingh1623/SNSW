@@ -5,6 +5,7 @@
  */
 package SNSWTests;
 
+import static SNSWTests.CreateAccountTests_LT_ChromeDriver.driver;
 import static SNSWTests.CreateAccountTests_LT_FirefoxDriver.driver;
 import static SNSWTests.CreateAccountTests_LT_FirefoxDriver.env;
 import TestHelpers.Environment;
@@ -15,6 +16,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -48,10 +50,18 @@ public class CreateAccountTests_LT_IEDriver {
     
     @Before
     public void setUp() {
+        System.setProperty("webdriver.ie.driver", "./lib/IEDriverServer32.exe");
+        DesiredCapabilities caps = DesiredCapabilities.internetExplorer();
+        caps.setCapability("ignoreZoomSetting", true);
+        driver = new InternetExplorerDriver(caps);
+        wdwait = new WebDriverWait(driver, 60);
     }
     
     @After
     public void tearDown() {
+        wdwait = null;
+        driver.close();
+        driver = null;
     }
 
     
@@ -60,12 +70,6 @@ public class CreateAccountTests_LT_IEDriver {
     //@Ignore("Test is ignored on purpose while building more tests")
     @Test
     public void checkForErrorMessages() {
-        System.setProperty("webdriver.ie.driver", "./lib/IEDriverServer32.exe");
-        DesiredCapabilities caps = DesiredCapabilities.internetExplorer();
-        caps.setCapability("ignoreZoomSetting", true);
-        caps.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, true);
-        driver = new InternetExplorerDriver(caps);
-        wdwait = new WebDriverWait(driver, 60);
 
         CreateAccountTests.checkForErrorMessages(driver, wdwait, env);
     }
@@ -74,11 +78,6 @@ public class CreateAccountTests_LT_IEDriver {
     //@Ignore("Test is ignored on purpose while building more tests")
     @Test
     public void verifyTCMandatory() {
-        System.setProperty("webdriver.ie.driver", "./lib/IEDriverServer32.exe");
-        DesiredCapabilities caps = DesiredCapabilities.internetExplorer();
-        caps.setCapability("ignoreZoomSetting", true);
-        driver = new InternetExplorerDriver(caps);
-        wdwait = new WebDriverWait(driver, 60);
 
         CreateAccountTests.verifyTCMandatory(driver, wdwait, env);
     }
@@ -87,13 +86,40 @@ public class CreateAccountTests_LT_IEDriver {
     //@Ignore("Test is ignored on purpose while building more tests")
     @Test
     public void invalidEmailAddress1() {
-        System.setProperty("webdriver.ie.driver", "./lib/IEDriverServer32.exe");
-        DesiredCapabilities caps = DesiredCapabilities.internetExplorer();
-        caps.setCapability("ignoreZoomSetting", true);
-        driver = new InternetExplorerDriver(caps);
-        wdwait = new WebDriverWait(driver, 60);
 
         CreateAccountTests.invalidEmailAddress1(driver, wdwait, env);
+    }
+    
+    
+    //@Ignore("Test is ignored on purpose while building more tests")
+    @Test
+    public void invalidEmailAddress2() {
+
+        CreateAccountTests.invalidEmailAddress2(driver, wdwait, env);
+    }
+    
+    
+    //@Ignore("Test is ignored on purpose while building more tests")
+    @Test
+    public void invalidEmailAddress3() {
+
+        CreateAccountTests.invalidEmailAddress3(driver, wdwait, env);
+    }
+    
+    
+    //@Ignore("Test is ignored on purpose while building more tests")
+    @Test
+    public void invalidEmailAddress4() {
+
+        CreateAccountTests.invalidEmailAddress4(driver, wdwait, env);
+    }
+    
+    
+    //@Ignore("Test is ignored on purpose while building more tests")
+    @Test
+    public void invalidEmailAddress5() {
+
+        CreateAccountTests.invalidEmailAddress5(driver, wdwait, env);
     }
     
 }

@@ -66,24 +66,6 @@ public class SNSWSeleniumTests {
     
 
     
-    //@Ignore("Test is ignored on purpose while building more tests")
-    @Test
-    public void invalidEmailAddress1() {
-        driver = new FirefoxDriver();
-        wdwait = new WebDriverWait(driver, 30);
-
-        driver.get(env.getCreateAccountURL());
-        System.out.println("Base Window Handle: " + driver.getWindowHandle());
-
-        CreateAccountPage cap = new CreateAccountPage(driver);
-        cap.waitForElements(wdwait);
-        cap.setEmail("abcdefg");
-        cap.setNews(true);
-        cap.pressRegisterAccountButton();
-        
-        cap.invalidEmailCheck("Invalid email address. Please enter an email address using the format example@email.com");
-        driver.close();
-    }
 
     
     @Test

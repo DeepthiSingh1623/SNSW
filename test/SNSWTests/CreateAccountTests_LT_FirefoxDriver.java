@@ -47,10 +47,15 @@ public class CreateAccountTests_LT_FirefoxDriver {
     
     @Before
     public void setUp() {
+        driver = new FirefoxDriver();
+        wdwait = new WebDriverWait(driver, 60);
     }
     
     @After
     public void tearDown() {
+        wdwait = null;
+        driver.close();
+        driver = null;
     }
 
     
@@ -59,8 +64,6 @@ public class CreateAccountTests_LT_FirefoxDriver {
     //@Ignore("Test is ignored on purpose while building more tests")
     @Test
     public void checkForErrorMessages() {
-        driver = new FirefoxDriver();
-        wdwait = new WebDriverWait(driver, 60);
 
         CreateAccountTests.checkForErrorMessages(driver, wdwait, env);
     }
@@ -69,8 +72,6 @@ public class CreateAccountTests_LT_FirefoxDriver {
     //@Ignore("Test is ignored on purpose while building more tests")
     @Test
     public void verifyTCMandatory() {
-        driver = new FirefoxDriver();
-        wdwait = new WebDriverWait(driver, 60);
 
         CreateAccountTests.verifyTCMandatory(driver, wdwait, env);
     }
@@ -79,9 +80,39 @@ public class CreateAccountTests_LT_FirefoxDriver {
     //@Ignore("Test is ignored on purpose while building more tests")
     @Test
     public void invalidEmailAddress1() {
-        driver = new FirefoxDriver();
-        wdwait = new WebDriverWait(driver, 60);
 
         CreateAccountTests.invalidEmailAddress1(driver, wdwait, env);
+    }
+    
+    
+    //@Ignore("Test is ignored on purpose while building more tests")
+    @Test
+    public void invalidEmailAddress2() {
+
+        CreateAccountTests.invalidEmailAddress2(driver, wdwait, env);
+    }
+    
+    
+    //@Ignore("Test is ignored on purpose while building more tests")
+    @Test
+    public void invalidEmailAddress3() {
+
+        CreateAccountTests.invalidEmailAddress3(driver, wdwait, env);
+    }
+    
+    
+    //@Ignore("Test is ignored on purpose while building more tests")
+    @Test
+    public void invalidEmailAddress4() {
+
+        CreateAccountTests.invalidEmailAddress4(driver, wdwait, env);
+    }
+    
+    
+    //@Ignore("Test is ignored on purpose while building more tests")
+    @Test
+    public void invalidEmailAddress5() {
+
+        CreateAccountTests.invalidEmailAddress5(driver, wdwait, env);
     }
 }

@@ -5,20 +5,18 @@
  */
 package SNSWTests;
 
-import static SNSWTests.SNSWSeleniumTests.driver;
 import SNSWWebPages.CreateAccountPage;
 import SNSWWebPages.Yopmail;
 import TestHelpers.Environment;
 import java.util.ArrayList;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Wait;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 /**
  *
- * @author Kurt
+ * @author Kurt MacNamara
+ * @date   12/11/2015
  */
 public class CreateAccountTests {
     
@@ -27,7 +25,6 @@ public class CreateAccountTests {
     public static void checkForErrorMessages(WebDriver driver, Wait<WebDriver> wdwait, Environment env) {
 
         driver.get(env.getCreateAccountURL());
-        //System.out.println("Base Window Handle: " + driver.getWindowHandle());
 
         CreateAccountPage cap = new CreateAccountPage(driver);
         cap.waitForElements(wdwait);
@@ -41,14 +38,12 @@ public class CreateAccountTests {
         errorMessages.add("Confirm Password: Please fill out this field.");
         errorMessages.add("Terms and Conditions: Please accept the Terms and Conditions to continue.");
         cap.numberForErrorsDisplayed(errorMessages);
-        driver.close();
     }
     
     
     public static void verifyTCMandatory(WebDriver driver, Wait<WebDriver> wdwait, Environment env) {
 
         driver.get(env.getCreateAccountURL());
-        //System.out.println("Base Window Handle: " + driver.getWindowHandle());
 
         String emailAddress = Yopmail.getEmailAddress();
         String emailPwd = Yopmail.getEmailPwd();
@@ -67,14 +62,12 @@ public class CreateAccountTests {
         ArrayList<String> errorMessages = new ArrayList<>();
         errorMessages.add("Terms and Conditions: Please accept the Terms and Conditions to continue.");
         cap.numberForErrorsDisplayed(errorMessages);
-        driver.close();
     }
 
     
     public static void invalidEmailAddress1(WebDriver driver, Wait<WebDriver> wdwait, Environment env) {
 
         driver.get(env.getCreateAccountURL());
-        //System.out.println("Base Window Handle: " + driver.getWindowHandle());
 
         CreateAccountPage cap = new CreateAccountPage(driver);
         cap.waitForElements(wdwait);
@@ -83,7 +76,62 @@ public class CreateAccountTests {
         cap.pressRegisterAccountButton();
         
         cap.invalidEmailCheck("Invalid email address. Please enter an email address using the format example@email.com");
-        driver.close();
+    }
+
+    
+    public static void invalidEmailAddress2(WebDriver driver, Wait<WebDriver> wdwait, Environment env) {
+
+        driver.get(env.getCreateAccountURL());
+
+        CreateAccountPage cap = new CreateAccountPage(driver);
+        cap.waitForElements(wdwait);
+        cap.setEmail("@wally.com");
+        cap.setNews(true);
+        cap.pressRegisterAccountButton();
+        
+        cap.invalidEmailCheck("Invalid email address. Please enter an email address using the format example@email.com");
+    }
+
+    
+    public static void invalidEmailAddress3(WebDriver driver, Wait<WebDriver> wdwait, Environment env) {
+
+        driver.get(env.getCreateAccountURL());
+
+        CreateAccountPage cap = new CreateAccountPage(driver);
+        cap.waitForElements(wdwait);
+        cap.setEmail("#@%^@#.com");
+        cap.setNews(true);
+        cap.pressRegisterAccountButton();
+        
+        cap.invalidEmailCheck("Invalid email address. Please enter an email address using the format example@email.com");
+    }
+
+    
+    public static void invalidEmailAddress4(WebDriver driver, Wait<WebDriver> wdwait, Environment env) {
+
+        driver.get(env.getCreateAccountURL());
+
+        CreateAccountPage cap = new CreateAccountPage(driver);
+        cap.waitForElements(wdwait);
+        cap.setEmail("example@example@example.com");
+        cap.setNews(true);
+        cap.pressRegisterAccountButton();
+        
+        cap.invalidEmailCheck("Invalid email address. Please enter an email address using the format example@email.com");
+    }
+
+    
+    public static void invalidEmailAddress5(WebDriver driver, Wait<WebDriver> wdwait, Environment env) {
+
+        driver.get(env.getCreateAccountURL());
+
+        CreateAccountPage cap = new CreateAccountPage(driver);
+        cap.waitForElements(wdwait);
+        cap.setEmail("Joe Smith <Abc..123@111.222.333.444> (Joe Smith)");
+        cap.setNews(true);
+        cap.pressRegisterAccountButton();
+        
+        cap.invalidEmailCheck("Invalid email address. Please enter an email address using the format example@email.com");
     }
 
 
