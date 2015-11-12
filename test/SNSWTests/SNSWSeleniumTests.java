@@ -64,34 +64,6 @@ public class SNSWSeleniumTests {
 
     
     
-    //@Ignore("Test is ignored on purpose while building more tests")
-    @Test
-    public void verifyTCMandatory() {
-        driver = new FirefoxDriver();
-        wdwait = new WebDriverWait(driver, 30);
-
-        driver.get(env.getCreateAccountURL());
-        System.out.println("Base Window Handle: " + driver.getWindowHandle());
-
-        String emailAddress = Yopmail.getEmailAddress();
-        String emailPwd = Yopmail.getEmailPwd();
-
-        CreateAccountPage cap = new CreateAccountPage(driver);
-        cap.waitForElements(wdwait);
-        cap.setEmail(emailAddress);
-        cap.setPassword(emailPwd);
-        cap.setConfirmPassword(emailPwd);
-        cap.setTermsAndConditions(false);
-        cap.pressRegisterAccountButton();
-
-        if (!cap.checkForError("Please check the following", "Please check the following 1 error:")) {
-            Assert.fail("The error message did not match");
-        }
-        ArrayList<String> errorMessages = new ArrayList<>();
-        errorMessages.add("Terms and Conditions: Please accept the Terms and Conditions to continue.");
-        cap.numberForErrorsDisplayed(errorMessages);
-        driver.close();
-    }
 
     
     //@Ignore("Test is ignored on purpose while building more tests")

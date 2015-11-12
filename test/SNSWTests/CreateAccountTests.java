@@ -27,7 +27,7 @@ public class CreateAccountTests {
     public static void checkForErrorMessages(WebDriver driver, Wait<WebDriver> wdwait, Environment env) {
 
         driver.get(env.getCreateAccountURL());
-        System.out.println("Base Window Handle: " + driver.getWindowHandle());
+        //System.out.println("Base Window Handle: " + driver.getWindowHandle());
 
         CreateAccountPage cap = new CreateAccountPage(driver);
         cap.waitForElements(wdwait);
@@ -48,7 +48,7 @@ public class CreateAccountTests {
     public static void verifyTCMandatory(WebDriver driver, Wait<WebDriver> wdwait, Environment env) {
 
         driver.get(env.getCreateAccountURL());
-        System.out.println("Base Window Handle: " + driver.getWindowHandle());
+        //System.out.println("Base Window Handle: " + driver.getWindowHandle());
 
         String emailAddress = Yopmail.getEmailAddress();
         String emailPwd = Yopmail.getEmailPwd();
@@ -71,5 +71,21 @@ public class CreateAccountTests {
     }
 
     
+    public static void invalidEmailAddress1(WebDriver driver, Wait<WebDriver> wdwait, Environment env) {
+
+        driver.get(env.getCreateAccountURL());
+        //System.out.println("Base Window Handle: " + driver.getWindowHandle());
+
+        CreateAccountPage cap = new CreateAccountPage(driver);
+        cap.waitForElements(wdwait);
+        cap.setEmail("abcdefg");
+        cap.setNews(true);
+        cap.pressRegisterAccountButton();
+        
+        cap.invalidEmailCheck("Invalid email address. Please enter an email address using the format example@email.com");
+        driver.close();
+    }
+
+
     
 }

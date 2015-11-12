@@ -5,8 +5,6 @@
  */
 package SNSWTests;
 
-import static SNSWTests.SNSWSeleniumTests.driver;
-import static SNSWTests.SNSWSeleniumTests.env;
 import SNSWWebPages.CreateAccountPage;
 import TestHelpers.Environment;
 import java.util.ArrayList;
@@ -75,5 +73,15 @@ public class CreateAccountTests_LT_FirefoxDriver {
         wdwait = new WebDriverWait(driver, 60);
 
         CreateAccountTests.verifyTCMandatory(driver, wdwait, env);
+    }
+    
+    
+    //@Ignore("Test is ignored on purpose while building more tests")
+    @Test
+    public void invalidEmailAddress1() {
+        driver = new FirefoxDriver();
+        wdwait = new WebDriverWait(driver, 60);
+
+        CreateAccountTests.invalidEmailAddress1(driver, wdwait, env);
     }
 }
