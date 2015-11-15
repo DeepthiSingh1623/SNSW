@@ -68,33 +68,6 @@ public class SNSWSeleniumTests {
     
 
     
-    @Test
-    public void checkFieldsExist() {
-        driver = new FirefoxDriver();
-        wdwait = new WebDriverWait(driver, 30);
-
-        driver.get(env.getCreateAccountURL());
-        System.out.println("Base Window Handle: " + driver.getWindowHandle());
-
-        CreateAccountPage cap = new CreateAccountPage(driver);
-        cap.waitForElements(wdwait);
-        
-        Assert.assertTrue(cap.existsEmailTitle(), "Email Title not found");
-        Assert.assertTrue(cap.existsEmailInput(), "Email Input field not found");
-        Assert.assertTrue(cap.existsPasswordTitle(), "Password Title not found");
-        Assert.assertTrue(cap.existsPasswordInput(), "Password Input field not found");
-        Assert.assertTrue(cap.existsShowPasswordAndConfirmPasswordCheckbox(), "Expecting both the Show Password Checkboxes to be found");
-        Assert.assertTrue(cap.existsEmailTitle(), "Confirm password Title not found");
-        Assert.assertTrue(cap.existsConfirmPasswordInput(), "Confirm password Input field not found");
-        Assert.assertTrue(cap.existsTermsAndConditionsCheckbox(), "Terms and Conditions checkbox not found");
-        Assert.assertTrue(cap.existsEmailNotificationCheckbox(), "Email Notification checkbox not found");
-        Assert.assertTrue(cap.existsNewsCheckbox(), "News checkbox not found");
-        Assert.assertTrue(cap.existsNewsGovernmentCheckbox(), "News Government checkbox not found");
-        
-        //existsNewsCheckbox
-        
-        driver.close();
-    }
     
     
     

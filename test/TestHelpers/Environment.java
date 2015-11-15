@@ -61,6 +61,29 @@ public class Environment {
         }
     }
     
+    
+    public String getExistingEmailAddress() {
+        switch(this.currentEnvironment) {
+            case LTCS6:
+                return "John_Peter_Smyth@yopmail.com";
+                
+            default:
+                return null;
+        }
+    }
+    
+    
+    public String getExistingEmailAddressPassword() {
+        switch(this.currentEnvironment) {
+            case LTCS6:
+                return "%Preferences10";
+                
+            default:
+                return null;
+        }
+    }
+    
+    
     public final static String randomString(final int length) {
         char[] chars = "abcdefghijklmnopqrstuvwxyz".toCharArray();
         Random r = new Random();

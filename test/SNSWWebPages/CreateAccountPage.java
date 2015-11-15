@@ -41,6 +41,7 @@ public class CreateAccountPage {
     private static final String wePasswordTitleXpath = "//span[contains(text(), \"Password\")][@class='ng-binding ng-scope']";
     private static final String weConfirmPasswordTitleXpath = "//span[contains(text(), \"Confirm password\")][@class='ng-binding ng-scope']";
     private static final String weExistsShowPasswordAndConfirmPasswordCheckboxXpath = "//input[@ng-click='togglePasswordVisible($event)']";
+    private static final String weComfirmPasswordNotMatchXpath = "//span[contains(text(), \"These passwords do not match. Try again.\")][@class='text-danger ng-binding']";
     
     
     private final WebDriver driver;
@@ -264,6 +265,38 @@ public class CreateAccountPage {
     public void invalidEmailCheck(String errorMessage) {
         try {
             WebElement element = this.driver.findElement(By.cssSelector("span[ng-show='fc[attrs.name].$error.invalidEmail && !fc[attrs.name].$error.invalidEmailLength']"));
+            Assert.assertEquals(element.getText(), errorMessage, "Expected the error message is not displayed");
+        } catch (NoSuchElementException e) {
+            System.out.println(Arrays.toString(e.getStackTrace()));
+            Assert.fail("Error finding the Invalid Email Message");
+        }
+    }
+    
+    public void invalidPasswordCheck(String errorMessage) {
+        try {
+            WebElement element = this.driver.findElement(By.xpath("//p[@class=\"help-block ng-binding\"]"));
+            Assert.assertEquals(element.getText(), errorMessage, "Expected the error message is not displayed");
+        } catch (NoSuchElementException e) {
+            System.out.println(Arrays.toString(e.getStackTrace()));
+            Assert.fail("Error finding the Invalid Password Message");
+        }
+    }
+    
+    public void confirmPasswordNotMatchMessagePresent() {
+        try {
+            WebElement element = this.driver.findElement(By.xpath(CreateAccountPage.weComfirmPasswordNotMatchXpath));
+        } catch (NoSuchElementException e) {
+            System.out.println(Arrays.toString(e.getStackTrace()));
+            Assert.fail("Did not find the confirm password not match message being displayed");
+        }
+    }
+    
+    public void emailAddressInUseMessage(Wait<WebDriver> wait, String errorMessage) {
+        try {
+            String xpath = "//div[@class='alert alert-danger ng-binding'][@ng-show='error']";
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
+
+            WebElement element = this.driver.findElement(By.xpath(xpath));
             Assert.assertEquals(element.getText(), errorMessage, "Expected the error message is not displayed");
         } catch (NoSuchElementException e) {
             System.out.println(Arrays.toString(e.getStackTrace()));
