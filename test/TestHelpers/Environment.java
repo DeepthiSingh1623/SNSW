@@ -16,7 +16,7 @@ public class Environment {
     private final String LoadTestURLCS5 = "https://lt-snsw.cs5.force.com/";
     private final String LoadTestURLCS6 = "https://loadtest-snsw.cs6.force.com/";
     private final String CreateAccountPath = "MyServiceNSW/index#/createAccount";
-    private final String IT2URL = "";
+    private final String IT2URL = "https://it2-snsw.cs5.force.com";
     private final String IT3URL = "";
     
     public enum Env {
@@ -42,6 +42,9 @@ public class Environment {
                 return LoadTestURLCS6;
                 
                 
+            case IT2:
+                return IT2URL;
+                
             default:
                 return null;
         }
@@ -55,6 +58,9 @@ public class Environment {
                 
             case LTCS6:
                 return LoadTestURLCS6 + CreateAccountPath;
+            
+            case IT2:
+                return IT2URL + CreateAccountPath;
                 
             default:
                 return null;
