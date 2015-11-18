@@ -5,8 +5,10 @@
         <group>
             <file>file:/C:/Users/Kurt/Documents/snsw-automation/test/SNSWTests/CreateAccountTests_LT_IEDriver.java</file>
             <file>file:/C:/Users/Kurt/Documents/snsw-automation/test/SNSWTests/SNSWSeleniumTests.java</file>
+            <file>file:/C:/Users/Kurt/Documents/snsw-automation/test/SNSWWebPages/CreateAccountValidate.java</file>
             <file>file:/C:/Users/Kurt/Documents/snsw-automation/test/SNSWTests/CreateAccountTests_LT_FirefoxDriver.java</file>
             <file>file:/C:/Users/Kurt/Documents/snsw-automation/test/SNSWTests/CreateAccountTests.java</file>
+            <file>file:/C:/Users/Kurt/Documents/snsw-automation/test/SNSWWebPages/CreateAccountPage.java</file>
             <file>file:/C:/Users/Kurt/Documents/snsw-automation/test/SNSWTests/CreateAccountTests_LT_ChromeDriver.java</file>
         </group>
     </open-files>
