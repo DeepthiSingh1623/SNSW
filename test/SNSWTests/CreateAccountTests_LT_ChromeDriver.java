@@ -7,6 +7,11 @@ package SNSWTests;
 
 import static SNSWTests.CreateAccountTests_LT_FirefoxDriver.driver;
 import TestHelpers.Environment;
+import java.io.File;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -29,6 +34,8 @@ public class CreateAccountTests_LT_ChromeDriver {
     static WebDriver driver;
     static Wait<WebDriver> wdwait;
     static Environment env;
+    static Date today;
+    static String filePathSnapshot;
 
     
     
@@ -38,6 +45,11 @@ public class CreateAccountTests_LT_ChromeDriver {
     @BeforeClass
     public static void setUpClass() {
         env = new Environment(Environment.Env.LTCS6);
+        today = Calendar.getInstance().getTime();
+        
+        DateFormat df = new SimpleDateFormat("yyyyMMdd_HHmmss");
+        filePathSnapshot = ".\\results\\CreateAccount_Chrome\\" + df.format(today);
+        new File(filePathSnapshot).mkdirs();
     }
     
     @AfterClass
@@ -65,24 +77,24 @@ public class CreateAccountTests_LT_ChromeDriver {
     //@Ignore("Test is ignored on purpose while building more tests")
     @Test
     public void UC01_AU001_checkForErrorMessages() {
-
-        CreateAccountTests.UC01_AU001_checkForErrorMessages(driver, wdwait, env);
+        String filepath = filePathSnapshot + "\\UC01_AU001_checkForErrorMessages_";
+        CreateAccountTests.UC01_AU001_checkForErrorMessages(driver, wdwait, env, filepath);
     }
     
     
     //@Ignore("Test is ignored on purpose while building more tests")
     @Test
     public void UC01_AU002_verifyTCMandatory() {
-
-        CreateAccountTests.UC01_AU002_verifyTCMandatory(driver, wdwait, env);
+        String filepath = filePathSnapshot + "\\UC01_AU002_verifyTCMandatory_";
+        CreateAccountTests.UC01_AU002_verifyTCMandatory(driver, wdwait, env, filepath);
     }
     
     
     //@Ignore("Test is ignored on purpose while building more tests")
     @Test
     public void UC01_AU003_invalidEmailAddress1() {
-
-        CreateAccountTests.UC01_AU003_invalidEmailAddress1(driver, wdwait, env);
+        String filepath = filePathSnapshot + "\\UC01_AU003_invalidEmailAddress1_";
+        CreateAccountTests.UC01_AU003_invalidEmailAddress1(driver, wdwait, env, filepath);
     }
     
     

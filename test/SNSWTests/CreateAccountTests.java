@@ -25,16 +25,20 @@ public class CreateAccountTests {
     
     
     
-    public static void UC01_AU001_checkForErrorMessages(WebDriver driver, Wait<WebDriver> wdwait, Environment env) {
+    public static void UC01_AU001_checkForErrorMessages(WebDriver driver, Wait<WebDriver> wdwait, Environment env, String filepath) {
 
         driver.get(env.getCreateAccountURL());
 
         CreateAccountPage cap = new CreateAccountPage(driver);
         cap.waitForElements(wdwait);
+        env.takeSnapshot(driver, filepath + "01_InitialLoad.png");
         cap.pressRegisterAccountButton();
         if (!cap.checkForError("Please check the following", "Please check the following 4 errors:")) {
+            env.takeSnapshot(driver, filepath + "02_ERROR Messages did not match.png");
             Assert.fail("The error message did not match");
         }
+
+        env.takeSnapshot(driver, filepath + "02_Messages Displayed.png");
         ArrayList<String> errorMessages = new ArrayList<>();
         errorMessages.add("Email Address: Invalid email address. Please enter an email address using the format example@email.com");
         errorMessages.add("Password: Please fill out this field.");
@@ -44,7 +48,7 @@ public class CreateAccountTests {
     }
     
     
-    public static void UC01_AU002_verifyTCMandatory(WebDriver driver, Wait<WebDriver> wdwait, Environment env) {
+    public static void UC01_AU002_verifyTCMandatory(WebDriver driver, Wait<WebDriver> wdwait, Environment env, String filepath) {
 
         driver.get(env.getCreateAccountURL());
 
@@ -53,6 +57,7 @@ public class CreateAccountTests {
 
         CreateAccountPage cap = new CreateAccountPage(driver);
         cap.waitForElements(wdwait);
+        env.takeSnapshot(driver, filepath + "01_InitialLoad.png");
         cap.setEmail(emailAddress);
         cap.setPassword(emailPwd);
         cap.setConfirmPassword(emailPwd);
@@ -60,24 +65,29 @@ public class CreateAccountTests {
         cap.pressRegisterAccountButton();
 
         if (!cap.checkForError("Please check the following", "Please check the following 1 error:")) {
+            env.takeSnapshot(driver, filepath + "02_ERROR Messages did not match.png");
             Assert.fail("The error message did not match");
         }
+        
+        env.takeSnapshot(driver, filepath + "02_Messages Displayed.png");
         ArrayList<String> errorMessages = new ArrayList<>();
         errorMessages.add("Terms and Conditions: Please accept the Terms and Conditions to continue.");
         cap.numberForErrorsDisplayed(errorMessages);
     }
 
     
-    public static void UC01_AU003_invalidEmailAddress1(WebDriver driver, Wait<WebDriver> wdwait, Environment env) {
+    public static void UC01_AU003_invalidEmailAddress1(WebDriver driver, Wait<WebDriver> wdwait, Environment env, String filepath) {
 
         driver.get(env.getCreateAccountURL());
 
         CreateAccountPage cap = new CreateAccountPage(driver);
         cap.waitForElements(wdwait);
+        env.takeSnapshot(driver, filepath + "01_InitialLoad.png");
         cap.setEmail("abcdefg");
         cap.setNews(true);
         cap.pressRegisterAccountButton();
         
+        env.takeSnapshot(driver, filepath + "02_Messages Displayed.png");
         cap.invalidEmailCheck("Invalid email address. Please enter an email address using the format example@email.com");
     }
 
@@ -340,6 +350,157 @@ public class CreateAccountTests {
         cav.pressResendEmail();
 
         cav.resendMessageDisplayedTwice(wdwait, "Activation email sent! Please check your inbox. The resend option is locked for 5 minutes.");
+    }
+
+    
+    public static void UC01_AU019_resendEmailManyTimes(WebDriver driver, Wait<WebDriver> wdwait, Environment env, String filepath) {
+        
+        try {
+            driver.manage().deleteAllCookies();
+            driver.get(env.getCreateAccountURL());
+            env.takeSnapshot(driver, filepath + "01_InitialLoad.png");
+            
+            String emailAddress = Yopmail.getEmailAddress();
+            String emailPwd = Yopmail.getEmailPwd();
+            CreateAccountPage cap = new CreateAccountPage(driver);
+            cap.waitForElements(wdwait);
+            cap.setEmail(emailAddress);
+            cap.setPassword(emailPwd);
+            cap.setConfirmPassword(emailPwd);
+            cap.setTermsAndConditions(true);
+            env.takeSnapshot(driver, filepath + "02_RegisterFilled.png");
+            cap.pressRegisterAccountButton();
+            
+            
+            //
+            //  The first time in the Creat Account Validation page
+            //
+            CreateAccountValidate cav = new CreateAccountValidate(driver);
+            cav.waitForElements(wdwait);
+            cav.isHeadingDisplayed();
+            cav.emailAddressDisplayed(emailAddress);
+            cav.pressResendEmail();
+            cav.pressResendEmail();
+            cav.pressResendEmail();
+            
+            cav.checkFiveMinuteLockMessage(wdwait);
+            cav.getAttributeOfResendEmailMessage("ng-disabled", "locked");
+            cav.getAttributeOfResendEmailMessage("disabled", "true");
+            
+            if (!cav.isResendEmailButtonDisabled()) {
+                Assert.fail("The Resend Email Button was not disabled.");
+            }
+            
+            //
+            //  Sleep for 5 minutes and 1 second.  See if the ResendButton is now active.
+            //
+            Thread.sleep(301000);
+            if (cav.isResendEmailButtonDisabled()) {
+                Assert.fail("The Resend Email Button was not active.");
+            }
+            
+            
+            //
+            //  The second time in the Creat Account Validation page
+            //
+            //
+            //  After the Resend Email button becomes available
+            //
+
+            cav.pressResendEmail();
+            cav.resendMessageDisplayedFirst(wdwait, "We sent you a verification email. Please finish registering your MyServiceNSW Account by following the link in the activation email. It will be active for one hour.");
+
+            cav.pressResendEmail();
+            cav.resendMessageDisplayedOnce(wdwait, "We sent you a verification email. Please finish registering your MyServiceNSW Account by following the link in the activation email. You have 1 attempt left to resend the registration link before it gets locked.");
+
+            cav.pressResendEmail();
+            cav.resendMessageDisplayedTwice(wdwait, "Activation email sent! Please check your inbox. The resend option is locked for 5 minutes.");
+            
+            cav.checkFiveMinuteLockMessage(wdwait);
+            cav.getAttributeOfResendEmailMessage("ng-disabled", "locked");
+            cav.getAttributeOfResendEmailMessage("disabled", "true");
+            
+            if (!cav.isResendEmailButtonDisabled()) {
+                Assert.fail("The Resend Email Button was not disabled.");
+            }
+            
+            //
+            //  Sleep for 5 minutes and 1 second.  See if the ResendButton is now active.
+            //
+            Thread.sleep(301000);
+            if (cav.isResendEmailButtonDisabled()) {
+                Assert.fail("The Resend Email Button was not active.");
+            }
+            
+            
+            //
+            //  The third time in the Creat Account Validation page
+            //
+            //
+            //  After the Resend Email button becomes available
+            //
+
+            cav.pressResendEmail();
+            cav.resendMessageDisplayedFirst(wdwait, "We sent you a verification email. Please finish registering your MyServiceNSW Account by following the link in the activation email. It will be active for one hour.");
+
+            cav.pressResendEmail();
+            cav.resendMessageDisplayedOnce(wdwait, "We sent you a verification email. Please finish registering your MyServiceNSW Account by following the link in the activation email. You have 1 attempt left to resend the registration link before it gets locked.");
+
+            cav.pressResendEmail();
+            cav.resendMessageDisplayedTwice(wdwait, "Activation email sent! Please check your inbox. The resend option is locked for 5 minutes.");
+            
+            cav.checkFiveMinuteLockMessage(wdwait);
+            cav.getAttributeOfResendEmailMessage("ng-disabled", "locked");
+            cav.getAttributeOfResendEmailMessage("disabled", "true");
+            
+            if (!cav.isResendEmailButtonDisabled()) {
+                Assert.fail("The Resend Email Button was not disabled.");
+            }
+            
+            //
+            //  Sleep for 5 minutes and 1 second.  See if the ResendButton is now active.
+            //
+            Thread.sleep(301000);
+            if (cav.isResendEmailButtonDisabled()) {
+                Assert.fail("The Resend Email Button was not active.");
+            }
+            
+            
+            //
+            //  The forth time in the Creat Account Validation page
+            //
+            //
+            //  After the Resend Email button becomes available
+            //
+
+            cav.pressResendEmail();
+            cav.resendMessageDisplayedFirst(wdwait, "We sent you a verification email. Please finish registering your MyServiceNSW Account by following the link in the activation email. It will be active for one hour.");
+
+            cav.pressResendEmail();
+            cav.resendMessageDisplayedOnce(wdwait, "We sent you a verification email. Please finish registering your MyServiceNSW Account by following the link in the activation email. You have 1 attempt left to resend the registration link before it gets locked.");
+
+            cav.pressResendEmail();
+            cav.resendMessageDisplayedTwice(wdwait, "Activation email sent! Please check your inbox. The resend option is locked for 5 minutes.");
+            
+            cav.checkFiveMinuteLockMessage(wdwait);
+            cav.getAttributeOfResendEmailMessage("ng-disabled", "locked");
+            cav.getAttributeOfResendEmailMessage("disabled", "true");
+            
+            if (!cav.isResendEmailButtonDisabled()) {
+                Assert.fail("The Resend Email Button was not disabled.");
+            }
+            
+            //
+            //  Sleep for 5 minutes and 1 second.  See if the ResendButton is now active.
+            //
+            Thread.sleep(301000);
+            if (cav.isResendEmailButtonDisabled()) {
+                Assert.fail("The Resend Email Button was not active.");
+            }
+            
+        } catch (InterruptedException ex) {
+            Logger.getLogger(CreateAccountTests.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
 
