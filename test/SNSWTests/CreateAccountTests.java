@@ -87,158 +87,219 @@ public class CreateAccountTests {
         cap.setNews(true);
         cap.pressRegisterAccountButton();
         
-        env.takeSnapshot(driver, filepath + "02_Messages Displayed.png");
-        cap.invalidEmailCheck("Invalid email address. Please enter an email address using the format example@email.com");
+        if (cap.invalidEmailCheck("Invalid email address. Please enter an email address using the format example@email.com")) {
+            env.takeSnapshot(driver, filepath + "02_Messages Displayed.png");
+        } else {
+            env.takeSnapshot(driver, filepath + "02_ERROR_Messages Displayed not expected.png");
+            Assert.fail("Email Address error message not what was expected");
+        }
     }
 
     
-    public static void UC01_AU004_invalidEmailAddress2(WebDriver driver, Wait<WebDriver> wdwait, Environment env) {
+    public static void UC01_AU004_invalidEmailAddress2(WebDriver driver, Wait<WebDriver> wdwait, Environment env, String filepath) {
 
         driver.get(env.getCreateAccountURL());
 
         CreateAccountPage cap = new CreateAccountPage(driver);
         cap.waitForElements(wdwait);
+        env.takeSnapshot(driver, filepath + "01_InitialLoad.png");
         cap.setEmail("@wally.com");
         cap.setNews(true);
         cap.pressRegisterAccountButton();
         
-        cap.invalidEmailCheck("Invalid email address. Please enter an email address using the format example@email.com");
+        if (cap.invalidEmailCheck("Invalid email address. Please enter an email address using the format example@email.com")) {
+            env.takeSnapshot(driver, filepath + "02_Messages Displayed.png");
+        } else {
+            env.takeSnapshot(driver, filepath + "02_ERROR_Messages Displayed not expected.png");
+            Assert.fail("Email Address error message not what was expected");
+        }
     }
 
     
-    public static void UC01_AU005_invalidEmailAddress3(WebDriver driver, Wait<WebDriver> wdwait, Environment env) {
+    public static void UC01_AU005_invalidEmailAddress3(WebDriver driver, Wait<WebDriver> wdwait, Environment env, String filepath) {
 
         driver.get(env.getCreateAccountURL());
 
         CreateAccountPage cap = new CreateAccountPage(driver);
         cap.waitForElements(wdwait);
+        env.takeSnapshot(driver, filepath + "01_InitialLoad.png");
         cap.setEmail("#@%^@#.com");
         cap.setNews(true);
         cap.pressRegisterAccountButton();
         
-        cap.invalidEmailCheck("Invalid email address. Please enter an email address using the format example@email.com");
+        if (cap.invalidEmailCheck("Invalid email address. Please enter an email address using the format example@email.com")) {
+            env.takeSnapshot(driver, filepath + "02_Messages Displayed.png");
+        } else {
+            env.takeSnapshot(driver, filepath + "02_ERROR_Messages Displayed not expected.png");
+            Assert.fail("Email Address error message not what was expected");
+        }
     }
 
     // comment for commit
-    public static void UC01_AU006_invalidEmailAddress4(WebDriver driver, Wait<WebDriver> wdwait, Environment env) {
+    public static void UC01_AU006_invalidEmailAddress4(WebDriver driver, Wait<WebDriver> wdwait, Environment env, String filepath) {
 
         driver.get(env.getCreateAccountURL());
 
         CreateAccountPage cap = new CreateAccountPage(driver);
         cap.waitForElements(wdwait);
+        env.takeSnapshot(driver, filepath + "01_InitialLoad.png");
         cap.setEmail("example@example@example.com");
         cap.setNews(true);
         cap.pressRegisterAccountButton();
         
-        cap.invalidEmailCheck("Invalid email address. Please enter an email address using the format example@email.com");
+        if (cap.invalidEmailCheck("Invalid email address. Please enter an email address using the format example@email.com")) {
+            env.takeSnapshot(driver, filepath + "02_Messages Displayed.png");
+        } else {
+            env.takeSnapshot(driver, filepath + "02_ERROR_Messages Displayed not expected.png");
+            Assert.fail("Email Address error message not what was expected");
+        }
     }
 
     
-    public static void UC01_AU007_invalidEmailAddress5(WebDriver driver, Wait<WebDriver> wdwait, Environment env) {
+    public static void UC01_AU007_invalidEmailAddress5(WebDriver driver, Wait<WebDriver> wdwait, Environment env, String filepath) {
 
         driver.get(env.getCreateAccountURL());
 
         CreateAccountPage cap = new CreateAccountPage(driver);
         cap.waitForElements(wdwait);
+        env.takeSnapshot(driver, filepath + "01_InitialLoad.png");
         cap.setEmail("Joe Smith <Abc..123@111.222.333.444> (Joe Smith)");
         cap.setNews(true);
         cap.pressRegisterAccountButton();
         
-        cap.invalidEmailCheck("Invalid email address. Please enter an email address using the format example@email.com");
+        if (cap.invalidEmailCheck("Invalid email address. Please enter an email address using the format example@email.com")) {
+            env.takeSnapshot(driver, filepath + "02_Messages Displayed.png");
+        } else {
+            env.takeSnapshot(driver, filepath + "02_ERROR_Messages Displayed not expected.png");
+            Assert.fail("Email Address error message not what was expected");
+        }
     }
 
     
-    public static void UC01_AU008_invalidEmailAddress6(WebDriver driver, Wait<WebDriver> wdwait, Environment env) {
+    public static void UC01_AU008_invalidEmailAddress6(WebDriver driver, Wait<WebDriver> wdwait, Environment env, String filepath) {
 
         driver.get(env.getCreateAccountURL());
 
         CreateAccountPage cap = new CreateAccountPage(driver);
         cap.waitForElements(wdwait);
+        env.takeSnapshot(driver, filepath + "01_InitialLoad.png");
         cap.setEmail("abc@@test");
         cap.setNews(true);
-        //cap.pressRegisterAccountButton();
+        cap.pressRegisterAccountButton();
         
-        cap.invalidEmailCheck("Invalid email address. Please enter an email address using the format example@email.com");
+        if (cap.invalidEmailCheck("Invalid email address. Please enter an email address using the format example@email.com")) {
+            env.takeSnapshot(driver, filepath + "02_Messages Displayed.png");
+        } else {
+            env.takeSnapshot(driver, filepath + "02_ERROR_Messages Displayed not expected.png");
+            Assert.fail("Email Address error message not what was expected");
+        }
     }
 
     
     //
     //  Password less than 7 characters
     //
-    public static void UC01_AU009_invalidPassword1(WebDriver driver, Wait<WebDriver> wdwait, Environment env) {
+    public static void UC01_AU009_invalidPassword1(WebDriver driver, Wait<WebDriver> wdwait, Environment env, String filepath) {
 
         driver.get(env.getCreateAccountURL());
 
         CreateAccountPage cap = new CreateAccountPage(driver);
         cap.waitForElements(wdwait);
+        env.takeSnapshot(driver, filepath + "01_InitialLoad.png");
         cap.setEmail("abc@@test");
         cap.setPassword("Ab12zz");
         cap.setNews(true);
         cap.pressRegisterAccountButton();
         
-        cap.invalidPasswordCheck("Use 7 or more characters including at least 1 number and 1 letter. For a stronger password, include uppercase, lowercase and special characters (punctuation or symbols).");
+        if (cap.invalidPasswordCheck("Use 7 or more characters including at least 1 number and 1 letter. For a stronger password, include uppercase, lowercase and special characters (punctuation or symbols).")) {
+            env.takeSnapshot(driver, filepath + "02_Messages Displayed.png");
+        } else {
+            env.takeSnapshot(driver, filepath + "02_ERROR_Messages Displayed not expected.png");
+            Assert.fail("Email Address error message not what was expected");
+        }
     }
 
     
-    public static void UC01_AU010_invalidPassword2(WebDriver driver, Wait<WebDriver> wdwait, Environment env) {
+    public static void UC01_AU010_invalidPassword2(WebDriver driver, Wait<WebDriver> wdwait, Environment env, String filepath) {
 
         driver.get(env.getCreateAccountURL());
 
         CreateAccountPage cap = new CreateAccountPage(driver);
         cap.waitForElements(wdwait);
+        env.takeSnapshot(driver, filepath + "01_InitialLoad.png");
         cap.setEmail("abc@@test");
         cap.setPassword("AbZgDeFWaslkmn");
         cap.setNews(true);
         cap.pressRegisterAccountButton();
         
-        cap.invalidPasswordCheck("Use 7 or more characters including at least 1 number and 1 letter. For a stronger password, include uppercase, lowercase and special characters (punctuation or symbols).");
+        if (cap.invalidPasswordCheck("Use 7 or more characters including at least 1 number and 1 letter. For a stronger password, include uppercase, lowercase and special characters (punctuation or symbols).")) {
+            env.takeSnapshot(driver, filepath + "02_Messages Displayed.png");
+        } else {
+            env.takeSnapshot(driver, filepath + "02_ERROR_Messages Displayed not expected.png");
+            Assert.fail("Email Address error message not what was expected");
+        }
     }
 
     
-    public static void UC01_AU011_invalidPassword3(WebDriver driver, Wait<WebDriver> wdwait, Environment env) {
+    public static void UC01_AU011_invalidPassword3(WebDriver driver, Wait<WebDriver> wdwait, Environment env, String filepath) {
 
         driver.get(env.getCreateAccountURL());
 
         CreateAccountPage cap = new CreateAccountPage(driver);
         cap.waitForElements(wdwait);
+        env.takeSnapshot(driver, filepath + "01_InitialLoad.png");
         cap.setEmail("abc@@test");
         cap.setPassword("12345678901234567890");
         cap.setNews(true);
         cap.pressRegisterAccountButton();
         
-        cap.invalidPasswordCheck("Use 7 or more characters including at least 1 number and 1 letter. For a stronger password, include uppercase, lowercase and special characters (punctuation or symbols).");
+        if (cap.invalidPasswordCheck("Use 7 or more characters including at least 1 number and 1 letter. For a stronger password, include uppercase, lowercase and special characters (punctuation or symbols).")) {
+            env.takeSnapshot(driver, filepath + "02_Messages Displayed.png");
+        } else {
+            env.takeSnapshot(driver, filepath + "02_ERROR_Messages Displayed not expected.png");
+            Assert.fail("Email Address error message not what was expected");
+        }
     }
 
     
-    public static void UC01_AU012_passwordAndConfirmPasswordNotMatch(WebDriver driver, Wait<WebDriver> wdwait, Environment env) {
+    public static void UC01_AU012_passwordAndConfirmPasswordNotMatch(WebDriver driver, Wait<WebDriver> wdwait, Environment env, String filepath) {
 
         driver.get(env.getCreateAccountURL());
 
         CreateAccountPage cap = new CreateAccountPage(driver);
         cap.waitForElements(wdwait);
+        env.takeSnapshot(driver, filepath + "01_InitialLoad.png");
         cap.setEmail("abc@@test");
         cap.setPassword("%Preferences10");
         cap.setConfirmPassword("%Preferences20");
         cap.setNews(true);
         cap.pressRegisterAccountButton();
         
-        cap.confirmPasswordNotMatchMessagePresent();
+        if (cap.confirmPasswordNotMatchMessagePresent()) {
+            env.takeSnapshot(driver, filepath + "02_Messages Displayed.png");
+        } else {
+            env.takeSnapshot(driver, filepath + "02_ERROR_Messages Displayed not expected.png");
+            Assert.fail("Password not match message is not displayed as expected");
+        }
     }
     
     
-    public static void UC01_AU013_emailAddressMandatory(WebDriver driver, Wait<WebDriver> wdwait, Environment env) {
+    public static void UC01_AU013_emailAddressMandatory(WebDriver driver, Wait<WebDriver> wdwait, Environment env, String filepath) {
 
         driver.get(env.getCreateAccountURL());
 
         CreateAccountPage cap = new CreateAccountPage(driver);
         cap.waitForElements(wdwait);
+        env.takeSnapshot(driver, filepath + "01_InitialLoad.png");
         cap.setPassword("%Preferences10");
         cap.setConfirmPassword("%Preferences10");
         cap.setTermsAndConditions(true);
         cap.pressRegisterAccountButton();
         if (!cap.checkForError("Please check the following", "Please check the following 1 error:")) {
+            env.takeSnapshot(driver, filepath + "02_ERROR MessagesDisplayed not expected.png");
             Assert.fail("The error message did not match");
         }
+        env.takeSnapshot(driver, filepath + "02_Messages Displayed.png");
         ArrayList<String> errorMessages = new ArrayList<>();
         errorMessages.add("Email Address: Invalid email address. Please enter an email address using the format example@email.com");
         cap.numberForErrorsDisplayed(errorMessages);

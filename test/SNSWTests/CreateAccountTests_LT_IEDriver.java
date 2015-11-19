@@ -44,16 +44,16 @@ public class CreateAccountTests_LT_IEDriver {
     
     
     public CreateAccountTests_LT_IEDriver() {
+    }
+    
+    @BeforeClass
+    public static void setUpClass() {
         env = new Environment(Environment.Env.LTCS6);
         today = Calendar.getInstance().getTime();
         
         DateFormat df = new SimpleDateFormat("yyyyMMdd_HHmmss");
         filePathSnapshot = ".\\results\\CreateAccount_IE\\" + df.format(today);
         new File(filePathSnapshot).mkdirs();
-    }
-    
-    @BeforeClass
-    public static void setUpClass() {
     }
     
     @AfterClass
@@ -106,32 +106,80 @@ public class CreateAccountTests_LT_IEDriver {
     //@Ignore("Test is ignored on purpose while building more tests")
     @Test
     public void UC01_AU004_invalidEmailAddress2() {
-
-        CreateAccountTests.UC01_AU004_invalidEmailAddress2(driver, wdwait, env);
+        String filepath = filePathSnapshot + "\\UC01_AU004_invalidEmailAddress2_";
+        CreateAccountTests.UC01_AU004_invalidEmailAddress2(driver, wdwait, env, filepath);
     }
     
     
     //@Ignore("Test is ignored on purpose while building more tests")
     @Test
     public void UC01_AU005_invalidEmailAddress3() {
-
-        CreateAccountTests.UC01_AU005_invalidEmailAddress3(driver, wdwait, env);
+        String filepath = filePathSnapshot + "\\UC01_AU005_invalidEmailAddress3_";
+        CreateAccountTests.UC01_AU005_invalidEmailAddress3(driver, wdwait, env, filepath);
     }
     
     
     //@Ignore("Test is ignored on purpose while building more tests")
     @Test
     public void UC01_AU006_invalidEmailAddress4() {
-
-        CreateAccountTests.UC01_AU006_invalidEmailAddress4(driver, wdwait, env);
+        String filepath = filePathSnapshot + "\\UC01_AU006_invalidEmailAddress4_";
+        CreateAccountTests.UC01_AU006_invalidEmailAddress4(driver, wdwait, env, filepath);
     }
     
     
     //@Ignore("Test is ignored on purpose while building more tests")
     @Test
     public void UC01_AU007_invalidEmailAddress5() {
-
-        CreateAccountTests.UC01_AU007_invalidEmailAddress5(driver, wdwait, env);
+        String filepath = filePathSnapshot + "\\UC01_AU007_invalidEmailAddress5_";
+        CreateAccountTests.UC01_AU007_invalidEmailAddress5(driver, wdwait, env, filepath);
+    }
+    
+    
+    //@Ignore("Test is ignored on purpose while building more tests")
+    @Test
+    public void UC01_AU008_invalidEmailAddress6() {
+        String filepath = filePathSnapshot + "\\UC01_AU008_invalidEmailAddress6_";
+        CreateAccountTests.UC01_AU008_invalidEmailAddress6(driver, wdwait, env, filepath);
+    }
+    
+    
+    //@Ignore("Test is ignored on purpose while building more tests")
+    @Test
+    public void UC01_AU009_invalidPassword1() {
+        String filepath = filePathSnapshot + "\\UC01_AU009_invalidPassword1_";
+        CreateAccountTests.UC01_AU009_invalidPassword1(driver, wdwait, env, filepath);
+    }
+    
+    
+    //@Ignore("Test is ignored on purpose while building more tests")
+    @Test
+    public void UC01_AU010_invalidPassword2() {
+        String filepath = filePathSnapshot + "\\UC01_AU010_invalidPassword2_";
+        CreateAccountTests.UC01_AU010_invalidPassword2(driver, wdwait, env, filepath);
+    }
+    
+    
+    //@Ignore("Test is ignored on purpose while building more tests")
+    @Test
+    public void UC01_AU011_invalidPassword3() {
+        String filepath = filePathSnapshot + "\\UC01_AU011_invalidPassword3_";
+        CreateAccountTests.UC01_AU011_invalidPassword3(driver, wdwait, env, filepath);
+    }
+    
+    
+    //@Ignore("Test is ignored on purpose while building more tests")
+    @Test
+    public void UC01_AU012_passwordAndConfirmPasswordNotMatch() {
+        String filepath = filePathSnapshot + "\\UC01_AU012_passwordAndConfirmPasswordNotMatch_";
+        CreateAccountTests.UC01_AU012_passwordAndConfirmPasswordNotMatch(driver, wdwait, env, filepath);
+    }
+    
+    
+    //@Ignore("Test is ignored on purpose while building more tests")
+    @Test
+    public void UC01_AU013_emailAddressMandatory() {
+        String filepath = filePathSnapshot + "\\UC01_AU013_emailAddressMandatory_";
+        CreateAccountTests.UC01_AU013_emailAddressMandatory(driver, wdwait, env, filepath);
     }
     
 }

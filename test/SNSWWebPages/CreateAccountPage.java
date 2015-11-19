@@ -262,32 +262,46 @@ public class CreateAccountPage {
         }
     }
     
-    public void invalidEmailCheck(String errorMessage) {
+    public boolean invalidEmailCheck(String errorMessage) {
         try {
             WebElement element = this.driver.findElement(By.cssSelector("span[ng-show='fc[attrs.name].$error.invalidEmail && !fc[attrs.name].$error.invalidEmailLength']"));
-            Assert.assertEquals(element.getText(), errorMessage, "Expected the error message is not displayed");
+            if (element.getText().equals(errorMessage)) {
+                return true;
+            } else {
+                System.out.println("ERROR: CreateAccountPage.invalidEmailCheck: Expected error message not displayed.");
+                return false;
+            }
         } catch (NoSuchElementException e) {
+            System.out.println("ERROR: CreateAccountPage.invalidEmailCheck: NoSuchElementException");
             System.out.println(Arrays.toString(e.getStackTrace()));
-            Assert.fail("Error finding the Invalid Email Message");
+            return false;
         }
     }
     
-    public void invalidPasswordCheck(String errorMessage) {
+    public boolean invalidPasswordCheck(String errorMessage) {
         try {
             WebElement element = this.driver.findElement(By.xpath("//p[@class=\"help-block ng-binding\"]"));
-            Assert.assertEquals(element.getText(), errorMessage, "Expected the error message is not displayed");
+            if (element.getText().equals(errorMessage)) {
+                return true;
+            } else {
+                System.out.println("ERROR: CreateAccountPage.invalidEmailCheck: Expected error message not displayed.");
+                return false;
+            }
         } catch (NoSuchElementException e) {
+            System.out.println("ERROR: CreateAccountPage.invalidPasswordCheck: NoSuchElementException");
             System.out.println(Arrays.toString(e.getStackTrace()));
-            Assert.fail("Error finding the Invalid Password Message");
+            return false;
         }
     }
     
-    public void confirmPasswordNotMatchMessagePresent() {
+    public boolean confirmPasswordNotMatchMessagePresent() {
         try {
             WebElement element = this.driver.findElement(By.xpath(CreateAccountPage.weComfirmPasswordNotMatchXpath));
+            return true;
         } catch (NoSuchElementException e) {
+            System.out.println("ERROR: CreateAccountPage.confirmPasswordNotMatchMessagePresent: NoSuchElementException");
             System.out.println(Arrays.toString(e.getStackTrace()));
-            Assert.fail("Did not find the confirm password not match message being displayed");
+            return false;
         }
     }
     
