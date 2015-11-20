@@ -470,6 +470,7 @@ public class CreateAccountTests {
     public static void UC01_AU019_resendEmailManyTimes(WebDriver driver, Wait<WebDriver> wdwait, Environment env, String filepath) {
         
         try {
+            boolean success = true;
             driver.manage().deleteAllCookies();
             driver.get(env.getCreateAccountURL());
             env.takeSnapshot(driver, filepath + "01_InitialLoad.png");
@@ -492,17 +493,29 @@ public class CreateAccountTests {
             CreateAccountValidate cav = new CreateAccountValidate(driver);
             cav.waitForElements(wdwait);
             cav.isHeadingDisplayed();
-            cav.emailAddressDisplayed(emailAddress);
+            if (!cav.emailAddressDisplayed(emailAddress)) {
+                success = false;
+                env.takeSnapshot(driver, filepath + "03_ERROR Email address not displayed.png");
+            } else {
+                env.takeSnapshot(driver, filepath + "03_Email address displayed.png");
+            }
             cav.pressResendEmail();
             cav.pressResendEmail();
             cav.pressResendEmail();
             
             cav.checkFiveMinuteLockMessage(wdwait);
-            cav.getAttributeOfResendEmailMessage("ng-disabled", "locked");
-            cav.getAttributeOfResendEmailMessage("disabled", "true");
+            if (!cav.getAttributeOfResendEmailMessage("ng-disabled", "locked") || !cav.getAttributeOfResendEmailMessage("disabled", "true")) {
+                success = false;
+                env.takeSnapshot(driver, filepath + "04_ERROR Email message not displayed.png");
+            } else {
+                env.takeSnapshot(driver, filepath + "04_Email message displayed.png");
+            }
             
             if (!cav.isResendEmailButtonDisabled()) {
-                Assert.fail("The Resend Email Button was not disabled.");
+                success = false;
+                env.takeSnapshot(driver, filepath + "05_ERROR Resend Button not disabled.png");
+            } else {
+                env.takeSnapshot(driver, filepath + "05_Resend Button disabled.png");
             }
             
             //
@@ -510,7 +523,10 @@ public class CreateAccountTests {
             //
             Thread.sleep(301000);
             if (cav.isResendEmailButtonDisabled()) {
-                Assert.fail("The Resend Email Button was not active.");
+                success = false;
+                env.takeSnapshot(driver, filepath + "06_ERROR Resend Button not enabled.png");
+            } else {
+                env.takeSnapshot(driver, filepath + "06_Resend Button enabled.png");
             }
             
             
@@ -522,20 +538,42 @@ public class CreateAccountTests {
             //
 
             cav.pressResendEmail();
-            cav.resendMessageDisplayedFirst(wdwait, "We sent you a verification email. Please finish registering your MyServiceNSW Account by following the link in the activation email. It will be active for one hour.");
+            if (!cav.resendMessageDisplayedFirst(wdwait, "We sent you a verification email. Please finish registering your MyServiceNSW Account by following the link in the activation email. It will be active for one hour.")) {
+                success = false;
+                env.takeSnapshot(driver, filepath + "07_ERROR First resend message.png");
+            } else {
+                env.takeSnapshot(driver, filepath + "07_First resend message.png");
+            }
 
             cav.pressResendEmail();
-            cav.resendMessageDisplayedOnce(wdwait, "We sent you a verification email. Please finish registering your MyServiceNSW Account by following the link in the activation email. You have 1 attempt left to resend the registration link before it gets locked.");
+            if (!cav.resendMessageDisplayedOnce(wdwait, "We sent you a verification email. Please finish registering your MyServiceNSW Account by following the link in the activation email. You have 1 attempt left to resend the registration link before it gets locked.")) {
+                success = false;
+                env.takeSnapshot(driver, filepath + "08_ERROR Second resend message.png");
+            } else {
+                env.takeSnapshot(driver, filepath + "08_Second resend message.png");
+            }
 
             cav.pressResendEmail();
-            cav.resendMessageDisplayedTwice(wdwait, "Activation email sent! Please check your inbox. The resend option is locked for 5 minutes.");
+            if (!cav.resendMessageDisplayedTwice(wdwait, "Activation email sent! Please check your inbox. The resend option is locked for 5 minutes.")) {
+                success = false;
+                env.takeSnapshot(driver, filepath + "09_ERROR Third resend message.png");
+            } else {
+                env.takeSnapshot(driver, filepath + "09_Third resend message.png");
+            }
             
             cav.checkFiveMinuteLockMessage(wdwait);
-            cav.getAttributeOfResendEmailMessage("ng-disabled", "locked");
-            cav.getAttributeOfResendEmailMessage("disabled", "true");
+            if (!cav.getAttributeOfResendEmailMessage("ng-disabled", "locked") || !cav.getAttributeOfResendEmailMessage("disabled", "true")) {
+                success = false;
+                env.takeSnapshot(driver, filepath + "10_ERROR Email message not displayed.png");
+            } else {
+                env.takeSnapshot(driver, filepath + "10_Email message displayed.png");
+            }
             
             if (!cav.isResendEmailButtonDisabled()) {
-                Assert.fail("The Resend Email Button was not disabled.");
+                success = false;
+                env.takeSnapshot(driver, filepath + "11_ERROR Resend Button not disabled.png");
+            } else {
+                env.takeSnapshot(driver, filepath + "11_Resend Button disabled.png");
             }
             
             //
@@ -543,7 +581,10 @@ public class CreateAccountTests {
             //
             Thread.sleep(301000);
             if (cav.isResendEmailButtonDisabled()) {
-                Assert.fail("The Resend Email Button was not active.");
+                success = false;
+                env.takeSnapshot(driver, filepath + "12_ERROR Resend Button not enabled.png");
+            } else {
+                env.takeSnapshot(driver, filepath + "12_Resend Button enabled.png");
             }
             
             
@@ -554,21 +595,44 @@ public class CreateAccountTests {
             //  After the Resend Email button becomes available
             //
 
-            cav.pressResendEmail();
-            cav.resendMessageDisplayedFirst(wdwait, "We sent you a verification email. Please finish registering your MyServiceNSW Account by following the link in the activation email. It will be active for one hour.");
 
             cav.pressResendEmail();
-            cav.resendMessageDisplayedOnce(wdwait, "We sent you a verification email. Please finish registering your MyServiceNSW Account by following the link in the activation email. You have 1 attempt left to resend the registration link before it gets locked.");
+            if (!cav.resendMessageDisplayedFirst(wdwait, "We sent you a verification email. Please finish registering your MyServiceNSW Account by following the link in the activation email. It will be active for one hour.")) {
+                success = false;
+                env.takeSnapshot(driver, filepath + "13_ERROR First resend message.png");
+            } else {
+                env.takeSnapshot(driver, filepath + "13_First resend message.png");
+            }
 
             cav.pressResendEmail();
-            cav.resendMessageDisplayedTwice(wdwait, "Activation email sent! Please check your inbox. The resend option is locked for 5 minutes.");
+            if (!cav.resendMessageDisplayedOnce(wdwait, "We sent you a verification email. Please finish registering your MyServiceNSW Account by following the link in the activation email. You have 1 attempt left to resend the registration link before it gets locked.")) {
+                success = false;
+                env.takeSnapshot(driver, filepath + "14_ERROR Second resend message.png");
+            } else {
+                env.takeSnapshot(driver, filepath + "14_Second resend message.png");
+            }
+
+            cav.pressResendEmail();
+            if (!cav.resendMessageDisplayedTwice(wdwait, "Activation email sent! Please check your inbox. The resend option is locked for 5 minutes.")) {
+                success = false;
+                env.takeSnapshot(driver, filepath + "15_ERROR Third resend message.png");
+            } else {
+                env.takeSnapshot(driver, filepath + "15_Third resend message.png");
+            }
             
             cav.checkFiveMinuteLockMessage(wdwait);
-            cav.getAttributeOfResendEmailMessage("ng-disabled", "locked");
-            cav.getAttributeOfResendEmailMessage("disabled", "true");
+            if (!cav.getAttributeOfResendEmailMessage("ng-disabled", "locked") || !cav.getAttributeOfResendEmailMessage("disabled", "true")) {
+                success = false;
+                env.takeSnapshot(driver, filepath + "16_ERROR Email message not displayed.png");
+            } else {
+                env.takeSnapshot(driver, filepath + "16_Email message displayed.png");
+            }
             
             if (!cav.isResendEmailButtonDisabled()) {
-                Assert.fail("The Resend Email Button was not disabled.");
+                success = false;
+                env.takeSnapshot(driver, filepath + "17_ERROR Resend Button not disabled.png");
+            } else {
+                env.takeSnapshot(driver, filepath + "17_Resend Button disabled.png");
             }
             
             //
@@ -576,7 +640,10 @@ public class CreateAccountTests {
             //
             Thread.sleep(301000);
             if (cav.isResendEmailButtonDisabled()) {
-                Assert.fail("The Resend Email Button was not active.");
+                success = false;
+                env.takeSnapshot(driver, filepath + "18_ERROR Resend Button not enabled.png");
+            } else {
+                env.takeSnapshot(driver, filepath + "18_Resend Button enabled.png");
             }
             
             
@@ -588,20 +655,42 @@ public class CreateAccountTests {
             //
 
             cav.pressResendEmail();
-            cav.resendMessageDisplayedFirst(wdwait, "We sent you a verification email. Please finish registering your MyServiceNSW Account by following the link in the activation email. It will be active for one hour.");
+            if (!cav.resendMessageDisplayedFirst(wdwait, "We sent you a verification email. Please finish registering your MyServiceNSW Account by following the link in the activation email. It will be active for one hour.")) {
+                success = false;
+                env.takeSnapshot(driver, filepath + "19_ERROR First resend message.png");
+            } else {
+                env.takeSnapshot(driver, filepath + "19_First resend message.png");
+            }
 
             cav.pressResendEmail();
-            cav.resendMessageDisplayedOnce(wdwait, "We sent you a verification email. Please finish registering your MyServiceNSW Account by following the link in the activation email. You have 1 attempt left to resend the registration link before it gets locked.");
+            if (!cav.resendMessageDisplayedOnce(wdwait, "We sent you a verification email. Please finish registering your MyServiceNSW Account by following the link in the activation email. You have 1 attempt left to resend the registration link before it gets locked.")) {
+                success = false;
+                env.takeSnapshot(driver, filepath + "20_ERROR Second resend message.png");
+            } else {
+                env.takeSnapshot(driver, filepath + "20_Second resend message.png");
+            }
 
             cav.pressResendEmail();
-            cav.resendMessageDisplayedTwice(wdwait, "Activation email sent! Please check your inbox. The resend option is locked for 5 minutes.");
+            if (!cav.resendMessageDisplayedTwice(wdwait, "Activation email sent! Please check your inbox. The resend option is locked for 5 minutes.")) {
+                success = false;
+                env.takeSnapshot(driver, filepath + "21_ERROR Third resend message.png");
+            } else {
+                env.takeSnapshot(driver, filepath + "21_Third resend message.png");
+            }
             
             cav.checkFiveMinuteLockMessage(wdwait);
-            cav.getAttributeOfResendEmailMessage("ng-disabled", "locked");
-            cav.getAttributeOfResendEmailMessage("disabled", "true");
+            if (!cav.getAttributeOfResendEmailMessage("ng-disabled", "locked") || !cav.getAttributeOfResendEmailMessage("disabled", "true")) {
+                success = false;
+                env.takeSnapshot(driver, filepath + "22_ERROR Email message not displayed.png");
+            } else {
+                env.takeSnapshot(driver, filepath + "22_Email message displayed.png");
+            }
             
             if (!cav.isResendEmailButtonDisabled()) {
-                Assert.fail("The Resend Email Button was not disabled.");
+                success = false;
+                env.takeSnapshot(driver, filepath + "23_ERROR Resend Button not disabled.png");
+            } else {
+                env.takeSnapshot(driver, filepath + "23_Resend Button disabled.png");
             }
             
             //
@@ -609,9 +698,15 @@ public class CreateAccountTests {
             //
             Thread.sleep(301000);
             if (cav.isResendEmailButtonDisabled()) {
-                Assert.fail("The Resend Email Button was not active.");
+                success = false;
+                env.takeSnapshot(driver, filepath + "24_ERROR Resend Button not enabled.png");
+            } else {
+                env.takeSnapshot(driver, filepath + "24_Resend Button enabled.png");
             }
             
+            if (!success) {
+                Assert.fail("Check the output and snapshots for the error details");
+            }
         } catch (InterruptedException ex) {
             Logger.getLogger(CreateAccountTests.class.getName()).log(Level.SEVERE, null, ex);
         }

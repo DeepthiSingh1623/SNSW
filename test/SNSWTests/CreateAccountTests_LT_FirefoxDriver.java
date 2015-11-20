@@ -212,12 +212,12 @@ public class CreateAccountTests_LT_FirefoxDriver {
         CreateAccountTests.UC01_AU018_resendEmailPressedTwice(driver, wdwait, env, filepath);
     }
     
-    /*
+    
     //@Ignore("Test is ignored on purpose while building more tests")
     @Test
     public void UC01_AU019_resendEmailManyTimes() {
         String filepath = filePathSnapshot + "\\UC01_AU019_resendEmailManyTimes_";
         CreateAccountTests.UC01_AU019_resendEmailManyTimes(driver, wdwait, env, filepath);
     }
-    */
+    
 }

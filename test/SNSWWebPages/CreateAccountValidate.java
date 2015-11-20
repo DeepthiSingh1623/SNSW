@@ -109,17 +109,22 @@ public class CreateAccountValidate {
         }
     }
     
-    public void resendMessageDisplayedFirst(Wait<WebDriver> wait, String messageDisplayed) {
+    public boolean resendMessageDisplayedFirst(Wait<WebDriver> wait, String messageDisplayed) {
         String xpath = "//span[@class='ng-binding ng-scope'][@ng-if='attemptsLeft !== 1']";
         try {
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
             WebElement element = this.driver.findElement(By.xpath(xpath));
             
             if(!element.getText().equals(messageDisplayed)) {
-                Assert.fail("Did not find the expected message");
+                System.out.println("CreateAccountValidate.resendMessageDisplayedFirst: ERROR The message was not as expected.");
+                return false;
+            } else {
+                return true;
             }
         } catch (NoSuchElementException e) {
+            System.out.println("CreateAccountValidate.resendMessageDisplayedFirst: ERROR Could not find the element");
             System.out.println(e.getStackTrace());
+            return false;
         }
     }
     
