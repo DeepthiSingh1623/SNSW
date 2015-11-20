@@ -305,16 +305,22 @@ public class CreateAccountPage {
         }
     }
     
-    public void emailAddressInUseMessage(Wait<WebDriver> wait, String errorMessage) {
+    public boolean emailAddressInUseMessage(Wait<WebDriver> wait, String errorMessage) {
         try {
             String xpath = "//div[@class='alert alert-danger ng-binding'][@ng-show='error']";
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
 
             WebElement element = this.driver.findElement(By.xpath(xpath));
-            Assert.assertEquals(element.getText(), errorMessage, "Expected the error message is not displayed");
+            if (element.getText().equals(errorMessage)) {
+                return true;
+            } else {
+                System.out.println("ERROR: CreateAccountPage.emailAddressInUseMessage: Email Address in usage message displayed not as expected.");
+                return false;
+            }
         } catch (NoSuchElementException e) {
+            System.out.println("ERROR: CreateAccountPage.emailAddressInUseMessage: NoSuchElementException");
             System.out.println(Arrays.toString(e.getStackTrace()));
-            Assert.fail("Error finding the Invalid Email Message");
+            return false;
         }
     }
 }

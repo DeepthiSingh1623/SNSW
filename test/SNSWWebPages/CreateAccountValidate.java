@@ -9,14 +9,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-//import org.openqa.selenium.chrome.ChromeDriver;
-//import org.openqa.selenium.firefox.FirefoxDriver;
-//import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Wait;
 import org.testng.Assert;
-//import org.openqa.selenium.support.ui.Wait;
-//import org.openqa.selenium.support.ui.WebDriverWait;
 
 /**
  *
@@ -86,24 +81,31 @@ public class CreateAccountValidate {
         }
     }
 
-    public void isHeadingDisplayed() {
+    public boolean isHeadingDisplayed() {
         try {
             String heading = this.driver.findElement(By.xpath(CreateAccountValidate.weHeadingTextXpath)).getText();
-            
-            if(!heading.equals("Activate your MyServiceNSW Account")) {
-                Assert.fail("Heading not as expected");
+            if (heading.equals("Activate your MyServiceNSW Account")) {
+                return true;
+            } else {
+                System.out.println("CreateAccountValidate.isHeadingDisplayed: ERROR The Header title did not match expected.");
+                return false;
             }
         } catch (NoSuchElementException e) {
+            System.out.println("CreateAccountValidate.isHeadingDisplayed: ERROR Could not find the element for the Page Header Title");
             System.out.println(e.getStackTrace());
+            return false;
         }
     }
     
-    public void emailAddressDisplayed(String emailAddress) {
+    public boolean emailAddressDisplayed(String emailAddress) {
         String xpath = "//strong[contains(text(), '" + emailAddress + "')][@class='ng-binding']";
         try {
             this.driver.findElement(By.xpath(xpath));
+            return true;
         } catch (NoSuchElementException e) {
+            System.out.println("CreateAccountValidate.emailAddressDisplayed: ERROR Could not find the element for the email address");
             System.out.println(e.getStackTrace());
+            return false;
         }
     }
     
@@ -121,31 +123,41 @@ public class CreateAccountValidate {
         }
     }
     
-    public void resendMessageDisplayedOnce(Wait<WebDriver> wait, String messageDisplayed) {
+    public boolean resendMessageDisplayedOnce(Wait<WebDriver> wait, String messageDisplayed) {
         String xpath = "//span[@class='ng-binding ng-scope'][@ng-if='attemptsLeft === 1']";
         try {
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
             WebElement element = this.driver.findElement(By.xpath(xpath));
             
             if(!element.getText().equals(messageDisplayed)) {
-                Assert.fail("Did not find the expected message");
+                System.out.println("CreateAccountValidate.resendMessageDisplayedOnce: ERROR The message was not as expected.");
+                return false;
+            } else {
+                return true;
             }
         } catch (NoSuchElementException e) {
+            System.out.println("CreateAccountValidate.resendMessageDisplayedOnce: ERROR Could not find the element");
             System.out.println(e.getStackTrace());
+            return false;
         }
     }
     
-    public void resendMessageDisplayedTwice(Wait<WebDriver> wait, String messageDisplayed) {
+    public boolean resendMessageDisplayedTwice(Wait<WebDriver> wait, String messageDisplayed) {
         String xpath = "//div[@class='alert alert-danger ng-binding ng-scope'][@ng-show='error']";
         try {
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
             WebElement element = this.driver.findElement(By.xpath(xpath));
             
             if(!element.getText().equals(messageDisplayed)) {
-                Assert.fail("Did not find the expected message");
+                System.out.println("CreateAccountValidate.resendMessageDisplayedTwice: ERROR The message was not as expected.");
+                return false;
+            } else {
+                return true;
             }
         } catch (NoSuchElementException e) {
+            System.out.println("CreateAccountValidate.resendMessageDisplayedTwice: ERROR Could not find the element");
             System.out.println(e.getStackTrace());
+            return false;
         }
     }
 }

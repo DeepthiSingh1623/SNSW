@@ -45,7 +45,7 @@ public class CreateAccountTests_LT_FirefoxDriver {
         today = Calendar.getInstance().getTime();
         
         DateFormat df = new SimpleDateFormat("yyyyMMdd_HHmmss");
-        filePathSnapshot = ".\\results\\CreateAccount_FireFox\\" + df.format(today);
+        filePathSnapshot = ".\\results\\CreateAccount_FireFox\\LTCS6\\" + df.format(today);
         new File(filePathSnapshot).mkdirs();
     }
     
@@ -172,47 +172,47 @@ public class CreateAccountTests_LT_FirefoxDriver {
         CreateAccountTests.UC01_AU013_emailAddressMandatory(driver, wdwait, env, filepath);
     }
     
-    /*
+    
     //@Ignore("Test is ignored on purpose while building more tests")
     @Test
     public void UC01_AU014_checkFieldsExist() {
-
-        CreateAccountTests.UC01_AU014_checkCreateAccountPageFieldsExist(driver, wdwait, env);
+        String filepath = filePathSnapshot + "\\UC01_AU014_checkFieldsExist_";
+        CreateAccountTests.UC01_AU014_checkCreateAccountPageFieldsExist(driver, wdwait, env, filepath);
     }
     
-
+    
     //@Ignore("Test is ignored on purpose while building more tests")
     @Test
     public void UC01_AU015_checkCreateAccountValidateFieldsExist() {
-
-        CreateAccountTests.UC01_AU015_checkCreateAccountValidateFieldsExist(driver, wdwait, env);
+        String filepath = filePathSnapshot + "\\UC01_AU015_checkCreateAccountValidateFieldsExist_";
+        CreateAccountTests.UC01_AU015_checkCreateAccountValidateFieldsExist(driver, wdwait, env, filepath);
     }
     
-
+    
     //@Ignore("Test is ignored on purpose while building more tests")
     @Test
     public void UC01_AU016_existingEmailAccount() {
-
-        CreateAccountTests.UC01_AU016_existingEmailAccount(driver, wdwait, env);
+        String filepath = filePathSnapshot + "\\UC01_AU016_existingEmailAccount_";
+        CreateAccountTests.UC01_AU016_existingEmailAccount(driver, wdwait, env, filepath);
     }
     
-
+    
     //@Ignore("Test is ignored on purpose while building more tests")
     @Test
     public void UC01_AU017_resendEmailPressedOnce() {
-
-        CreateAccountTests.UC01_AU017_resendEmailPressedOnce(driver, wdwait, env);
+        String filepath = filePathSnapshot + "\\UC01_AU017_resendEmailPressedOnce_";
+        CreateAccountTests.UC01_AU017_resendEmailPressedOnce(driver, wdwait, env, filepath);
     }
 
     
     //@Ignore("Test is ignored on purpose while building more tests")
     @Test
     public void UC01_AU018_resendEmailPressedTwice() {
-
-        CreateAccountTests.UC01_AU018_resendEmailPressedTwice(driver, wdwait, env);
+        String filepath = filePathSnapshot + "\\UC01_AU018_resendEmailPressedTwice_";
+        CreateAccountTests.UC01_AU018_resendEmailPressedTwice(driver, wdwait, env, filepath);
     }
     
-    
+    /*
     //@Ignore("Test is ignored on purpose while building more tests")
     @Test
     public void UC01_AU019_resendEmailManyTimes() {

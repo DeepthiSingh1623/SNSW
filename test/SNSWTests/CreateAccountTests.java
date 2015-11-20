@@ -306,12 +306,13 @@ public class CreateAccountTests {
     }
 
     
-    public static void UC01_AU014_checkCreateAccountPageFieldsExist(WebDriver driver, Wait<WebDriver> wdwait, Environment env) {
+    public static void UC01_AU014_checkCreateAccountPageFieldsExist(WebDriver driver, Wait<WebDriver> wdwait, Environment env, String filepath) {
 
         driver.get(env.getCreateAccountURL());
 
         CreateAccountPage cap = new CreateAccountPage(driver);
         cap.waitForElements(wdwait);
+        env.takeSnapshot(driver, filepath + "01_InitialLoad.png");
         Assert.assertTrue(cap.existsEmailTitle(), "Email Title not found");
         Assert.assertTrue(cap.existsEmailInput(), "Email Input field not found");
         Assert.assertTrue(cap.existsPasswordTitle(), "Password Title not found");
@@ -326,91 +327,143 @@ public class CreateAccountTests {
     }
 
     
-    public static void UC01_AU015_checkCreateAccountValidateFieldsExist(WebDriver driver, Wait<WebDriver> wdwait, Environment env) {
+    public static void UC01_AU015_checkCreateAccountValidateFieldsExist(WebDriver driver, Wait<WebDriver> wdwait, Environment env, String filepath) {
         
+        boolean success = true;
         driver.get(env.getCreateAccountURL());
         String emailAddress = Yopmail.getEmailAddress();
         String emailPwd = Yopmail.getEmailPwd();
         CreateAccountPage cap = new CreateAccountPage(driver);
         cap.waitForElements(wdwait);
+        env.takeSnapshot(driver, filepath + "01_InitialLoad.png");
         cap.setEmail(emailAddress);
         cap.setPassword(emailPwd);
         cap.setConfirmPassword(emailPwd);
         cap.setTermsAndConditions(true);
+        env.takeSnapshot(driver, filepath + "02_Before Press Register Account Button.png");
         cap.pressRegisterAccountButton();
         
         
         CreateAccountValidate cav = new CreateAccountValidate(driver);
         cav.waitForElements(wdwait);
-        cav.isHeadingDisplayed();
-        cav.emailAddressDisplayed(emailAddress);
+        env.takeSnapshot(driver, filepath + "03_Validate Account Page Displayed.png");
+        if (!cav.isHeadingDisplayed()) {
+            success = false;
+            env.takeSnapshot(driver, filepath + "04_ERROR Header displayed incorrect.png");
+        }
+        if (!cav.emailAddressDisplayed(emailAddress)) {
+            success = false;
+            env.takeSnapshot(driver, filepath + "04_ERROR email address not displayed.png");
+        }
+        
+        if (!success) {
+            Assert.fail("Check the snapshots and output for what failed.");
+        }
     }
 
     
-    public static void UC01_AU016_existingEmailAccount(WebDriver driver, Wait<WebDriver> wdwait, Environment env) {
+    public static void UC01_AU016_existingEmailAccount(WebDriver driver, Wait<WebDriver> wdwait, Environment env, String filepath) {
         
         driver.get(env.getCreateAccountURL());
         String emailAddress = env.getExistingEmailAddress();
         String emailPwd = env.getExistingEmailAddressPassword();
         CreateAccountPage cap = new CreateAccountPage(driver);
         cap.waitForElements(wdwait);
+        env.takeSnapshot(driver, filepath + "01_InitialLoad.png");
         cap.setEmail(emailAddress);
         cap.setPassword(emailPwd);
         cap.setConfirmPassword(emailPwd);
         cap.setTermsAndConditions(true);
         cap.pressRegisterAccountButton();
-        cap.emailAddressInUseMessage(wdwait, "This email address is already in use. Please enter another email address.");
+        if (cap.emailAddressInUseMessage(wdwait, "This email address is already in use. Please enter another email address.")) {
+            env.takeSnapshot(driver, filepath + "02_Email Address in use message.png");
+        } else {
+            env.takeSnapshot(driver, filepath + "02_ERROR Email Address in use message.png");
+            Assert.fail("Email Address in use message not as expected");
+        }
     }
 
     
-    public static void UC01_AU017_resendEmailPressedOnce(WebDriver driver, Wait<WebDriver> wdwait, Environment env) {
+    public static void UC01_AU017_resendEmailPressedOnce(WebDriver driver, Wait<WebDriver> wdwait, Environment env, String filepath) {
         
+        boolean success = true;
         driver.manage().deleteAllCookies();
         driver.get(env.getCreateAccountURL());
         String emailAddress = Yopmail.getEmailAddress();
         String emailPwd = Yopmail.getEmailPwd();
         CreateAccountPage cap = new CreateAccountPage(driver);
         cap.waitForElements(wdwait);
+        env.takeSnapshot(driver, filepath + "01_InitialLoad.png");
         cap.setEmail(emailAddress);
         cap.setPassword(emailPwd);
         cap.setConfirmPassword(emailPwd);
         cap.setTermsAndConditions(true);
+        env.takeSnapshot(driver, filepath + "02_Before Register Button Pressed.png");
         cap.pressRegisterAccountButton();
         
         
         CreateAccountValidate cav = new CreateAccountValidate(driver);
         cav.waitForElements(wdwait);
+        env.takeSnapshot(driver, filepath + "03_Validate Account Page.png");
         cav.isHeadingDisplayed();
-        cav.emailAddressDisplayed(emailAddress);
+        if (!cav.emailAddressDisplayed(emailAddress)) {
+            success = false;
+            env.takeSnapshot(driver, filepath + "04_ERROR Email Address not displayed.png");
+        }
         cav.pressResendEmail();
+        if (!cav.resendMessageDisplayedOnce(wdwait, "We sent you a verification email. Please finish registering your MyServiceNSW Account by following the link in the activation email. You have 1 attempt left to resend the registration link before it gets locked.")) {
+            success = false;
+            env.takeSnapshot(driver, filepath + "05_ERROR Resend Message not as expected.png");
+        }
         
-        cav.resendMessageDisplayedOnce(wdwait, "We sent you a verification email. Please finish registering your MyServiceNSW Account by following the link in the activation email. You have 1 attempt left to resend the registration link before it gets locked.");
+        if (!success) {
+            Assert.fail("One or more errors encountered check snapshots and output.");
+        }
     }
 
     
-    public static void UC01_AU018_resendEmailPressedTwice(WebDriver driver, Wait<WebDriver> wdwait, Environment env) {
+    public static void UC01_AU018_resendEmailPressedTwice(WebDriver driver, Wait<WebDriver> wdwait, Environment env, String filepath) {
         
+        boolean success = true;
         driver.manage().deleteAllCookies();
         driver.get(env.getCreateAccountURL());
         String emailAddress = Yopmail.getEmailAddress();
         String emailPwd = Yopmail.getEmailPwd();
         CreateAccountPage cap = new CreateAccountPage(driver);
         cap.waitForElements(wdwait);
+        env.takeSnapshot(driver, filepath + "01_InitialLoad.png");
         cap.setEmail(emailAddress);
         cap.setPassword(emailPwd);
         cap.setConfirmPassword(emailPwd);
         cap.setTermsAndConditions(true);
+        env.takeSnapshot(driver, filepath + "02_Before Register email button pressed.png");
         cap.pressRegisterAccountButton();
 
 
         CreateAccountValidate cav = new CreateAccountValidate(driver);
         cav.waitForElements(wdwait);
-        cav.isHeadingDisplayed();
-        cav.emailAddressDisplayed(emailAddress);
+        env.takeSnapshot(driver, filepath + "03_Validate Account Page.png");
+        if (!cav.isHeadingDisplayed()) {
+            success = false;
+            env.takeSnapshot(driver, filepath + "04_ERROR Heading not displayed.png");
+        }
+        if (!cav.emailAddressDisplayed(emailAddress)) {
+            success = false;
+            env.takeSnapshot(driver, filepath + "05_ERROR Email Address not displayed.png");
+        }
         cav.pressResendEmail();
         cav.pressResendEmail();
 
-        cav.resendMessageDisplayedTwice(wdwait, "Activation email sent! Please check your inbox. The resend option is locked for 5 minutes.");
+        if (!cav.resendMessageDisplayedTwice(wdwait, "Activation email sent! Please check your inbox. The resend option is locked for 5 minutes.")) {
+            success = false;
+            env.takeSnapshot(driver, filepath + "06_ERROR resend message not as expected.png");
+        } else {
+            env.takeSnapshot(driver, filepath + "05_Resend Message displayed as expected.png");
+        }
+        
+        if (!success) {
+            Assert.fail("One or more errors encountered check snapshots and output.");
+        }
     }
 
     

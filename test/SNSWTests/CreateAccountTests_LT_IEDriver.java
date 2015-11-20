@@ -5,9 +5,6 @@
  */
 package SNSWTests;
 
-import static SNSWTests.CreateAccountTests_LT_ChromeDriver.driver;
-import static SNSWTests.CreateAccountTests_LT_FirefoxDriver.driver;
-import static SNSWTests.CreateAccountTests_LT_FirefoxDriver.env;
 import TestHelpers.Environment;
 import java.io.File;
 import java.text.DateFormat;
@@ -19,10 +16,7 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.Wait;
@@ -52,7 +46,7 @@ public class CreateAccountTests_LT_IEDriver {
         today = Calendar.getInstance().getTime();
         
         DateFormat df = new SimpleDateFormat("yyyyMMdd_HHmmss");
-        filePathSnapshot = ".\\results\\CreateAccount_IE\\" + df.format(today);
+        filePathSnapshot = ".\\results\\CreateAccount_IE\\LTCS6\\" + df.format(today);
         new File(filePathSnapshot).mkdirs();
     }
     
@@ -180,6 +174,46 @@ public class CreateAccountTests_LT_IEDriver {
     public void UC01_AU013_emailAddressMandatory() {
         String filepath = filePathSnapshot + "\\UC01_AU013_emailAddressMandatory_";
         CreateAccountTests.UC01_AU013_emailAddressMandatory(driver, wdwait, env, filepath);
+    }
+    
+    
+    //@Ignore("Test is ignored on purpose while building more tests")
+    @Test
+    public void UC01_AU014_checkFieldsExist() {
+        String filepath = filePathSnapshot + "\\UC01_AU014_checkFieldsExist_";
+        CreateAccountTests.UC01_AU014_checkCreateAccountPageFieldsExist(driver, wdwait, env, filepath);
+    }
+    
+    
+    //@Ignore("Test is ignored on purpose while building more tests")
+    @Test
+    public void UC01_AU015_checkCreateAccountValidateFieldsExist() {
+        String filepath = filePathSnapshot + "\\UC01_AU015_checkCreateAccountValidateFieldsExist_";
+        CreateAccountTests.UC01_AU015_checkCreateAccountValidateFieldsExist(driver, wdwait, env, filepath);
+    }
+    
+    
+    //@Ignore("Test is ignored on purpose while building more tests")
+    @Test
+    public void UC01_AU016_existingEmailAccount() {
+        String filepath = filePathSnapshot + "\\UC01_AU016_existingEmailAccount_";
+        CreateAccountTests.UC01_AU016_existingEmailAccount(driver, wdwait, env, filepath);
+    }
+    
+    
+    //@Ignore("Test is ignored on purpose while building more tests")
+    @Test
+    public void UC01_AU017_resendEmailPressedOnce() {
+        String filepath = filePathSnapshot + "\\UC01_AU017_resendEmailPressedOnce_";
+        CreateAccountTests.UC01_AU017_resendEmailPressedOnce(driver, wdwait, env, filepath);
+    }
+
+    
+    //@Ignore("Test is ignored on purpose while building more tests")
+    @Test
+    public void UC01_AU018_resendEmailPressedTwice() {
+        String filepath = filePathSnapshot + "\\UC01_AU018_resendEmailPressedTwice_";
+        CreateAccountTests.UC01_AU018_resendEmailPressedTwice(driver, wdwait, env, filepath);
     }
     
 }
