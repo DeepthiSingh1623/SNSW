@@ -22,8 +22,12 @@ public class Environment {
     private final String LoadTestURLCS5 = "https://lt-snsw.cs5.force.com/";
     private final String LoadTestURLCS6 = "https://loadtest-snsw.cs6.force.com/";
     private final String CreateAccountPath = "MyServiceNSW/index#/createAccount";
+    private final String RMSChangeDetailsPath = "MyServiceNSW/index#/rms/changeDetails";
     private final String IT2URL = "https://it2-snsw.cs5.force.com";
     private final String IT3URL = "";
+    
+    private final String LTCS6CheckDemeritsCsvPath = ".\\data\\LTCS6CheckDemerits.csv";
+    private final String LTCS6LoginsCsvPath = ".\\data\\LTCS6CheckDemerits.csv";
     
     public enum Env {
          LTCS5
@@ -74,6 +78,23 @@ public class Environment {
     }
     
     
+    public String getRMSChangeDetailsURL() {
+        switch(this.currentEnvironment) {
+            case LTCS5:
+                return LoadTestURLCS5 + RMSChangeDetailsPath;
+                
+            case LTCS6:
+                return LoadTestURLCS6 + RMSChangeDetailsPath;
+            
+            case IT2:
+                return IT2URL + RMSChangeDetailsPath;
+                
+            default:
+                return null;
+        }
+    }
+    
+    
     public String getExistingEmailAddress() {
         switch(this.currentEnvironment) {
             case LTCS6:
@@ -89,6 +110,28 @@ public class Environment {
         switch(this.currentEnvironment) {
             case LTCS6:
                 return "%Preferences10";
+                
+            default:
+                return null;
+        }
+    }
+    
+    
+    public String getLoginsFilePath() {
+        switch(this.currentEnvironment) {
+            case LTCS6:
+                return LTCS6LoginsCsvPath;
+                
+            default:
+                return null;
+        }
+    }
+    
+    
+    public String getDemeritsFilePath() {
+        switch(this.currentEnvironment) {
+            case LTCS6:
+                return LTCS6CheckDemeritsCsvPath;
                 
             default:
                 return null;
@@ -116,4 +159,5 @@ public class Environment {
             System.out.println(e.getStackTrace());
         }
     }
+    
 }
