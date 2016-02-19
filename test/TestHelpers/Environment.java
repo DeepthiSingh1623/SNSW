@@ -23,7 +23,8 @@ public class Environment {
     private final String LoadTestURLCS6 = "https://loadtest-snsw.cs6.force.com/";
     private final String CreateAccountPath = "MyServiceNSW/index#/createAccount";
     private final String RMSChangeDetailsPath = "MyServiceNSW/index#/rms/changeDetails";
-    private final String IT2URL = "https://it2-snsw.cs5.force.com";
+    private final String CheckRegoDetailsPath = "MyServiceNSW/index#/rms/freeRegoCheck/details";
+    private final String IT2URL = "https://it2-snsw.cs6.force.com/";
     private final String IT3URL = "";
     
     private final String LTCS6CheckDemeritsCsvPath = ".\\data\\LTCS6CheckDemerits.csv";
@@ -77,7 +78,6 @@ public class Environment {
         }
     }
     
-    
     public String getRMSChangeDetailsURL() {
         switch(this.currentEnvironment) {
             case LTCS5:
@@ -88,6 +88,22 @@ public class Environment {
             
             case IT2:
                 return IT2URL + RMSChangeDetailsPath;
+                
+            default:
+                return null;
+        }
+    }
+    
+    public String getCheckRegoURL() {
+        switch(this.currentEnvironment) {
+            case LTCS5:
+                return LoadTestURLCS5 + CheckRegoDetailsPath;
+                
+            case LTCS6:
+                return LoadTestURLCS6 + CheckRegoDetailsPath;
+            
+            case IT2:
+                return IT2URL + CheckRegoDetailsPath;
                 
             default:
                 return null;

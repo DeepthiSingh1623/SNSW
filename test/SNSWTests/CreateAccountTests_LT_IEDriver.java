@@ -42,7 +42,7 @@ public class CreateAccountTests_LT_IEDriver {
     
     @BeforeClass
     public static void setUpClass() {
-        env = new Environment(Environment.Env.LTCS6);
+        env = new Environment(Environment.Env.IT2);
         today = Calendar.getInstance().getTime();
         
         DateFormat df = new SimpleDateFormat("yyyyMMdd_HHmmss");
@@ -56,7 +56,7 @@ public class CreateAccountTests_LT_IEDriver {
     
     @Before
     public void setUp() {
-        System.setProperty("webdriver.ie.driver", "./lib/IEDriverServer32.exe");
+        System.setProperty("webdriver.ie.driver", "C:\\protractorTest\\drivers\\IEDriverServer_x64_2.45.0\\IEDriverServer.exe");
         DesiredCapabilities caps = DesiredCapabilities.internetExplorer();
         caps.setCapability("ignoreZoomSetting", true);
         driver = new InternetExplorerDriver(caps);
