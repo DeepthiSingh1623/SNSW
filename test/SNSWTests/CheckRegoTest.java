@@ -1,79 +1,41 @@
 package SNSWTests;
 
-import java.io.File;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.ie.InternetExplorerDriver;
-import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.support.ui.Wait;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.Test;
 
-import SNSWWebPages.CreateAccountPage;
-import TestHelpers.Environment;
 
-public class CheckRegoTest {
+public class CheckRegoTest extends SNSWTestBase{
 	
-	static WebDriver driver;
-    static Wait<WebDriver> wdwait;
-    static Environment env;
-    static Date today;
-    static String filePathSnapshot;
-
-    
-    
-    @BeforeClass
-    public static void setUpClass() {
-        env = new Environment(Environment.Env.IT2);
-        today = Calendar.getInstance().getTime();
-        
-        DateFormat df = new SimpleDateFormat("yyyyMMdd_HHmmss");
-        filePathSnapshot = ".\\results\\CheckRego_IE\\IT2\\" + df.format(today);
-        new File(filePathSnapshot).mkdirs();
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
-    
-    @Before
-    public void setUp() {
-        System.setProperty("webdriver.ie.driver", "C:\\protractorTest\\drivers\\IEDriverServer_x64_2.45.0\\IEDriverServer.exe");
-        DesiredCapabilities caps = DesiredCapabilities.internetExplorer();
-        caps.setCapability("ignoreZoomSetting", true);
-        driver = new InternetExplorerDriver(caps);
-        wdwait = new WebDriverWait(driver, 60);
-    }
-    
-    @After
-    public void tearDown() {
-        wdwait = null;
-        driver.close();
-        driver = null;
-    }
-
-    
-    
-    
+	 static String filePathSnapshot;
+	
     //@Ignore("Test is ignored on purpose while building more tests")
     @Test
-    public void UC01_AU001_checkForErrorMessages() {
+    public void testFreeRegoReport() {
         String filepath = filePathSnapshot + "\\UC01_AU001_checkForErrorMessages_";
         driver.get(env.getCheckRegoURL());
         env.takeSnapshot(driver, filepath + "01_InitialLoad.png");
         WebElement plateNo=driver.findElement(By.id("plateNumber"));
         plateNo.sendKeys("GN170");
-;     
+        //WebElement chkBox=driver.findElement(By.cssSelector("input[id=formly_1_checkbox-label-with-action_termsAndConditions_1][type=checkbox]"));
+        WebElement chkBoxs=driver.findElement(By.id("formly_2_checkbox-label-with-action_termsAndConditions_1"));
+        JavascriptExecutor js = (JavascriptExecutor)driver; 
+        js.executeScript("arguments[0].click();", chkBoxs);
+        
+        //This we are using toto manully select captch during this time. Once captch has been switched OFF, we can remove this line.
+        try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        
+        
+        WebElement nextBtn=driver.findElement(By.xpath("//button[text()='Next']"));
+        nextBtn.click();
+        
+    
     }
     
 

@@ -24,8 +24,9 @@ public class Environment {
     private final String CreateAccountPath = "MyServiceNSW/index#/createAccount";
     private final String RMSChangeDetailsPath = "MyServiceNSW/index#/rms/changeDetails";
     private final String CheckRegoDetailsPath = "MyServiceNSW/index#/rms/freeRegoCheck/details";
-    private final String IT2URL = "https://it2-snsw.cs6.force.com/";
-    private final String IT3URL = "";
+    private final String IT2URL = "https://it2-snsw.cs31.force.com/";
+    private final String IT3URL = "https://it3-snsw.cs6.force.com/";
+    private final String PSMURL = "https://psm-snsw.cs6.force.com/";
     
     private final String LTCS6CheckDemeritsCsvPath = ".\\data\\LTCS6CheckDemerits.csv";
     private final String LTCS6LoginsCsvPath = ".\\data\\LTCS6CheckDemerits.csv";
@@ -35,6 +36,7 @@ public class Environment {
         ,LTCS6
         ,IT2
         ,IT3
+        ,PSM
     }
     
     
@@ -55,7 +57,11 @@ public class Environment {
                 
             case IT2:
                 return IT2URL;
+            case IT3:
+                return IT3URL;  
                 
+            case PSM:
+                return PSMURL;   
             default:
                 return null;
         }
@@ -73,6 +79,12 @@ public class Environment {
             case IT2:
                 return IT2URL + CreateAccountPath;
                 
+            case IT3:
+                return IT3URL + CreateAccountPath;
+               
+            case PSM:
+                return PSMURL + CreateAccountPath;
+                
             default:
                 return null;
         }
@@ -88,6 +100,12 @@ public class Environment {
             
             case IT2:
                 return IT2URL + RMSChangeDetailsPath;
+             
+            case IT3:
+                return IT3URL + RMSChangeDetailsPath;
+                
+            case PSM:
+                return PSMURL + RMSChangeDetailsPath;     
                 
             default:
                 return null;
@@ -104,6 +122,12 @@ public class Environment {
             
             case IT2:
                 return IT2URL + CheckRegoDetailsPath;
+                
+            case IT3:
+                return IT3URL + CheckRegoDetailsPath;
+                
+            case PSM:
+                return PSMURL + CheckRegoDetailsPath;
                 
             default:
                 return null;

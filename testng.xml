@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="SNSWAutomationSuite">
+ <parameter name="Env"  value="IT2"/>  
+ <parameter name="Browser"  value="IE"/>
+<listeners>
+	<listener class-name="TestHelpers.Screenshot" /> 
+ </listeners>   
+ 
+ <test name="R3.1 Regression">
+    <classes>
+    	 <class name="SNSWTests.CheckRegoTest"/>
+     </classes>
+  </test>
+
+ </suite> <!-- SNSWAutomationSuite -->
+
