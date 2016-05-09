@@ -60,7 +60,7 @@ public class CreateAccountTests_LT_IEDriver {
         DesiredCapabilities caps = DesiredCapabilities.internetExplorer();
         caps.setCapability("ignoreZoomSetting", true);
         driver = new InternetExplorerDriver(caps);
-        wdwait = new WebDriverWait(driver, 60);
+        wdwait = new WebDriverWait(driver, 90);
     }
     
     @After

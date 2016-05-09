@@ -111,8 +111,10 @@ public class Yopmail {
     
     public void clickFinishRegistering(Wait<WebDriver> wait) {
         this.driver.switchTo().frame("ifmail");
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.linkText("Finish registering")));
-        this.driver.findElement(By.linkText("Finish registering")).click();
+        WebElement finishBtn=wait.until(ExpectedConditions.visibilityOfElementLocated(By.linkText("Finish registering")));
+        String url=finishBtn.getAttribute("href");
+        //finishBtn.click();
+        this.driver.get(url);
         this.driver.switchTo().defaultContent();
     }
 }

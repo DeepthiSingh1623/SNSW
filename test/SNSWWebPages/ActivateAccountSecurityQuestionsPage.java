@@ -71,6 +71,6 @@ public class ActivateAccountSecurityQuestionsPage {
     }
     
     public void pressNextButton() {
-        driver.findElement(By.xpath("/html/body/div[2]/div[2]/div/ng-transclude/div/div[3]/form/div[3]/button")).click();
+        driver.findElement(By.xpath("//button[text()='Next']")).click();
     }
 }

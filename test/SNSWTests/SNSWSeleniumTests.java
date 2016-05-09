@@ -47,7 +47,7 @@ public class SNSWSeleniumTests {
     
     @BeforeClass
     public static void setUpClass() {
-        env = new Environment(Environment.Env.LTCS6);
+        env = new Environment(Environment.Env.IT2);
     }
     
     @AfterClass
@@ -90,7 +90,13 @@ public class SNSWSeleniumTests {
             cap.setPassword(emailPwd);
             cap.setConfirmPassword(emailPwd);
             cap.setTermsAndConditions(true);
+            
+            //Srirupa : This wait has been implemented to wait until manual captch selection has been done. 
+            //once the captcha is disabled on test env this line need to be removed. 
+            Thread.sleep(60000);
+            
             cap.pressRegisterAccountButton();
+            
             
             
             CreateAccountValidate cav = new CreateAccountValidate(driver);
@@ -126,7 +132,7 @@ public class SNSWSeleniumTests {
             //
             //  At this point there are two windows open when using FirefoxDriver
             //
-            driver.switchTo().window((String)handles.toArray()[1]);
+            //driver.switchTo().window((String)handles.toArray()[1]);
             ActivateAccountLoginPage aalp = new ActivateAccountLoginPage(driver);
             aalp.waitForElements(wdwait);
             aalp.setUsername(emailAddress);
@@ -175,8 +181,8 @@ public class SNSWSeleniumTests {
             Thread.sleep(2000);
             
             driver.close();
-            driver.switchTo().window((String)handles.toArray()[0]);
-            driver.close();
+            //driver.switchTo().window((String)handles.toArray()[0]);
+            //driver.close();
 
         } catch (InterruptedException ex) {
             Logger.getLogger(SNSWSeleniumTests.class.getName()).log(Level.SEVERE, null, ex);

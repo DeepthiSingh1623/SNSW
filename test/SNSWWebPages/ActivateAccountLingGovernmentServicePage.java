@@ -23,11 +23,13 @@ public class ActivateAccountLingGovernmentServicePage {
     }
 
     public void waitForElements(Wait<WebDriver> wait) {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div[2]/div[2]/div/ng-transclude/div/div[4]/a[2]")));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div[2]/div[1]/div/div[1]/div[3]/ul/li[8]/a")));
     }
     
     
-    public void pressLogoutButton() {
-        driver.findElement(By.xpath("/html/body/div[2]/div[2]/div/ng-transclude/div/div[4]/a[2]")).click();
+    public void pressLogoutButton() throws InterruptedException {
+    	driver.findElement(By.xpath("/html/body/div[2]/div[1]/div/div[1]/div[3]/ul/li[8]/a")).click();
+        Thread.sleep(1000);
+        driver.findElement(By.xpath("/html/body/div[8]/div/div/div/div[4]/button[1]")).click();
     }
 }

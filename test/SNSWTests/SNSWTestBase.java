@@ -13,7 +13,9 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
@@ -27,10 +29,10 @@ import TestHelpers.Environment;
 
 public class SNSWTestBase {
 	
-	public WebDriver driver ;
+	  WebDriver driver ;
 
 	
-	@BeforeTest
+	@BeforeClass
 	@Parameters({"Env", "Browser"})
 	public void setUp( String Environment , String Browser) throws IOException, ParseException {
 		
@@ -40,7 +42,7 @@ public class SNSWTestBase {
 	}
 	
 
-	@AfterMethod(alwaysRun=true)
+	@AfterClass(alwaysRun=true)
 	public void tearDown() throws Exception{
 		try{
 			driver.close();

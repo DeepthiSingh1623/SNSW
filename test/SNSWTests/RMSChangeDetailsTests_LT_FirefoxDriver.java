@@ -42,7 +42,7 @@ public class RMSChangeDetailsTests_LT_FirefoxDriver {
     
     @BeforeClass
     public static void setUpClass() {
-        env = new Environment(Environment.Env.LTCS6);
+        env = new Environment(Environment.Env.IT2);
         today = Calendar.getInstance().getTime();
         
         DateFormat df = new SimpleDateFormat("yyyyMMdd_HHmmss");

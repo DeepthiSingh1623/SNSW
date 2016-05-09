@@ -64,7 +64,7 @@ public class CreateAccountTests {
         cap.setTermsAndConditions(false);
         cap.pressRegisterAccountButton();
 
-        if (!cap.checkForError("Please check the following", "Please check the following 1 error:")) {
+        if (!cap.checkForError("Please check the following", "Please check the following 2 errors:")) {
             env.takeSnapshot(driver, filepath + "02_ERROR Messages did not match.png");
             Assert.fail("The error message did not match");
         }
@@ -211,7 +211,7 @@ public class CreateAccountTests {
         cap.setNews(true);
         cap.pressRegisterAccountButton();
         
-        if (cap.invalidPasswordCheck("Use 7 or more characters including at least 1 number and 1 letter. For a stronger password, include uppercase, lowercase and special characters (punctuation or symbols).")) {
+        if (cap.invalidPasswordCheck("Use 7 or more characters including at least 1 number and 1 letter. For a stronger password, include uppercase, lowercase and a special character.")) {
             env.takeSnapshot(driver, filepath + "02_Messages Displayed.png");
         } else {
             env.takeSnapshot(driver, filepath + "02_ERROR_Messages Displayed not expected.png");
@@ -232,7 +232,7 @@ public class CreateAccountTests {
         cap.setNews(true);
         cap.pressRegisterAccountButton();
         
-        if (cap.invalidPasswordCheck("Use 7 or more characters including at least 1 number and 1 letter. For a stronger password, include uppercase, lowercase and special characters (punctuation or symbols).")) {
+        if (cap.invalidPasswordCheck("Use 7 or more characters including at least 1 number and 1 letter. For a stronger password, include uppercase, lowercase and a special character.")) {
             env.takeSnapshot(driver, filepath + "02_Messages Displayed.png");
         } else {
             env.takeSnapshot(driver, filepath + "02_ERROR_Messages Displayed not expected.png");
@@ -253,7 +253,7 @@ public class CreateAccountTests {
         cap.setNews(true);
         cap.pressRegisterAccountButton();
         
-        if (cap.invalidPasswordCheck("Use 7 or more characters including at least 1 number and 1 letter. For a stronger password, include uppercase, lowercase and special characters (punctuation or symbols).")) {
+        if (cap.invalidPasswordCheck("Use 7 or more characters including at least 1 number and 1 letter. For a stronger password, include uppercase, lowercase and a special character.")) {
             env.takeSnapshot(driver, filepath + "02_Messages Displayed.png");
         } else {
             env.takeSnapshot(driver, filepath + "02_ERROR_Messages Displayed not expected.png");

@@ -21,7 +21,7 @@ public class CreateAccountValidate {
     
     
     
-    private static final String weResendEmailXpath = "//button[contains(text(), 'Resend email')]";
+    private static final String weResendEmailXpath = "//button[contains(text(), 'Resend Email')]";
     private static final String weHeadingTextXpath = "//h2[@class=\"ng-binding ng-isolate-scope\"]";
     private static final String weLockedForFiveMinutesMessage = "//div[@class=\"alert alert-danger ng-binding ng-scope\"][@ng-show=\"error\"]";
 
