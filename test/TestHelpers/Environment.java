@@ -24,6 +24,7 @@ public class Environment {
     private final String CreateAccountPath = "MyServiceNSW/index#/createAccount";
     private final String RMSChangeDetailsPath = "MyServiceNSW/index#/rms/changeDetails";
     private final String CheckRegoDetailsPath = "MyServiceNSW/index#/rms/freeRegoCheck/details";
+    private final String loginURL = "MyServiceNSW";
     private final String IT2URL = "https://it2-snsw.cs31.force.com/";
     private final String IT3URL = "https://it3-snsw.cs6.force.com/";
     private final String PSMURL = "https://psm-snsw.cs6.force.com/";
@@ -134,7 +135,27 @@ public class Environment {
         }
     }
     
-    
+    public String getLoginURL() {
+        switch(this.currentEnvironment) {
+            case LTCS5:
+                return LoadTestURLCS5 + loginURL;
+                
+            case LTCS6:
+                return LoadTestURLCS6 + loginURL;
+            
+            case IT2:
+                return IT2URL + loginURL;
+                
+            case IT3:
+                return IT3URL + loginURL;
+                
+            case PSM:
+                return PSMURL + loginURL;
+                
+            default:
+                return IT2URL+loginURL;
+        }
+    }
     public String getExistingEmailAddress() {
         switch(this.currentEnvironment) {
             case LTCS6:

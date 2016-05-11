@@ -41,6 +41,8 @@ public class SNSWTestBase {
 		getEnvURL(Environment);
 	}
 	
+	
+	
 
 	@AfterClass(alwaysRun=true)
 	public void tearDown() throws Exception{

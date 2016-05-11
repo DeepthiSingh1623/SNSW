@@ -7,6 +7,9 @@ package SNSWWebPages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Wait;
 
@@ -14,22 +17,48 @@ import org.openqa.selenium.support.ui.Wait;
  *
  * @author Kurt
  */
-public class ServiceNSWDashboardPage {
+public class ServiceNSWDashboardPage extends DriverPage{
     
-    private final WebDriver driver;
+    
     
     public ServiceNSWDashboardPage(WebDriver driver) {
-        this.driver = driver;
+        super(driver);
     }
 
     public void waitForElements(Wait<WebDriver> wait) {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div[2]/div[1]/div/div[1]/div[3]/ul/li[8]/a")));
     }
     
+    @FindBy(xpath="/html/body/div[2]/div[1]/div/div[1]/div[3]/ul/li[8]/a")
+    private WebElement logoutLink;
+    
+    @FindBy(xpath="/html/body/div[4]/div/div/div/div[3]/button[1]")
+    private WebElement logoutPbtn;
     
     public void pressLogoutButton() throws InterruptedException {
-        driver.findElement(By.xpath("/html/body/div[2]/div[1]/div/div[1]/div[3]/ul/li[8]/a")).click();
+    	logoutLink.click();
         Thread.sleep(1000);
-        driver.findElement(By.xpath("/html/body/div[4]/div/div/div/div[3]/button[1]")).click();
+        logoutPbtn.click();
+    }
+    
+  //Deepthi adding Feedback Button
+    @FindBy(xpath="//a[text()='Give feedback']")
+    private WebElement FeedbackBtn;
+    
+    public FeedbackPage pressFeedbackButton(){
+    	explicitFluentWait(FeedbackBtn);
+    	FeedbackBtn.click();
+    	return PageFactory.initElements(driver,FeedbackPage.class); 
+    }        
+    
+    //DS adding Setting tab 
+    @FindBy(xpath="//a[text()='Settings']")
+    private WebElement SettingsTab;
+    
+    public SettingsPage pressSettingsTab()
+    {
+    	explicitFluentWait(SettingsTab);
+    	SettingsTab.click();
+    	return PageFactory.initElements(driver, SettingsPage.class);
     }
 }
