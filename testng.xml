@@ -9,7 +9,7 @@
  
  <test name="R3.1 Regression">
     <classes>
-    	 <class name="SNSWTests.SNSWFeedBackTest"/>
+    	 <class name="r1regression.SNSWFeedBackTest"/>
      </classes>
   </test>
 
