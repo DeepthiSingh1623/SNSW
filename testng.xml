@@ -7,7 +7,7 @@
 	<listener class-name="TestHelpers.Screenshot" /> 
  </listeners>   
  
- <test name="R3.1 Regression">
+ <test name="R1.1 Regression">
     <classes>
     	 <class name="r1regression.SNSWFeedBackTest"/>
      </classes>
