@@ -61,4 +61,15 @@ public class ServiceNSWDashboardPage extends DriverPage{
     	SettingsTab.click();
     	return PageFactory.initElements(driver, SettingsPage.class);
     }
+    
+    //DS - My Services tab 
+    @FindBy(xpath="//a[text()='My services']")
+    private WebElement myServicesTab;
+    
+    public MyServicesPage pressmyServicesTab()
+    {
+    	explicitFluentWait(myServicesTab);
+    	myServicesTab.click();
+    	return PageFactory.initElements(driver, MyServicesPage.class);
+    }
 }
