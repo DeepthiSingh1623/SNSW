@@ -53,6 +53,7 @@ public class LicenceDetailsOptionAPage extends DriverPage {
 				
 		public RMSLinkSucessMsgPage enterRtaLicDetails(String LicNum, String pwd)
 		{
+			explicitFluentWait(RtaPassword);
 		enterRtaLicNum(LicNum);
 		enterRtaPwd(pwd);
 		ClickRtaTermsAndConditions();

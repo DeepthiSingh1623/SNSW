@@ -20,7 +20,7 @@ public class LicenceDetailsOptionCPage extends DriverPage {
 
 		{	
 
-			explicitFluentWait(TryAnotherLink);
+			explicitFluentWait(firstName);
 			TryAnotherLink.click();
 			return PageFactory.initElements(driver, LicenceDetailsOptionAPage.class);
 			

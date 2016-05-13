@@ -5,15 +5,19 @@ import static org.testng.AssertJUnit.assertTrue;
 import java.io.IOException;
 
 import org.openqa.selenium.support.PageFactory;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import SNSWWebPages.LicenceDetailsOptionAPage;
 import SNSWWebPages.LicenceDetailsOptionBPage;
 import SNSWWebPages.LicenceDetailsOptionCPage;
 import SNSWWebPages.LoginPage;
+import SNSWWebPages.ManageRMSPage;
 import SNSWWebPages.MyServicesPage;
 import SNSWWebPages.RMSLinkSucessMsgPage;
+import SNSWWebPages.RMSUnlinkSucessPage;
 import SNSWWebPages.ServiceNSWDashboardPage;
+import SNSWWebPages.VerifyPassword;
 import TestHelpers.Utilities;
 
 public class RMSLinkingOptionATest extends R1RegressionTestBase{
@@ -47,5 +51,28 @@ public class RMSLinkingOptionATest extends R1RegressionTestBase{
 	linkSucessMsg.explicitFluentWait(linkSucessMsg.SucessLinkLicenceDetailsMsg);
 	assertTrue(linkSucessMsg.isElementExist(linkSucessMsg.SucessLinkLicenceDetailsMsg));
 	
+	
+	//Click Next Button on the Success Page
+	MyServicesPage servicesPg1 = linkSucessMsg.PressNextBtnSucessMsgScrn();
+			
+	//Click Manage Button
+	ManageRMSPage manageRMS = servicesPg1.PressRMSManageBtn();
+			
+	//Verify residential and Mailing Address
+	manageRMS.explicitFluentWait(manageRMS.ResAddress);
+	Assert.assertEquals(manageRMS.ResAddress.getText(),data[12]);
+	manageRMS.explicitFluentWait(manageRMS.MailAddres);
+	Assert.assertEquals(manageRMS.MailAddres.getText(),data[13]);
+			
+	//Click on Unlink Link					
+	
+	VerifyPassword VerifyPass = manageRMS.unlinkRMS();
+					
+	//Enter Password and Verify
+	RMSUnlinkSucessPage unlinkSucess = VerifyPass.EnterPwdUnink(data[2]);
+					
+	//Verifying the Successfully UnLinked  Message
+	unlinkSucess.explicitFluentWait(unlinkSucess.UnlinkSucessMsg);
+	assertTrue(unlinkSucess.isElementExist(unlinkSucess.UnlinkSucessMsg));
  }
 }
