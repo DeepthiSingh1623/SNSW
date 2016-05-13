@@ -9,8 +9,9 @@
  
  <test name="R1.1 Regression">
     <classes>
-     		<class name="r1regression.SNSWFeedBackTest"/>
-    	 <class name="r1regression.SNSWUpdateSecurityQTest"/>
+     	<class name="r1regression.FeedBackTest"/>
+    	 <class name="r1regression.UpdateSecurityQTest"/>
+    	 <class name="r1regression.CheckDemeritsTest"/>
      </classes>
   </test>
 

@@ -50,4 +50,12 @@ public class LoginPage extends DriverPage{
 		return  PageFactory.initElements(driver, ServiceNSWDashboardPage.class);
 	}
 
+	public DemeritsTAndC demeritsLogin(String uName,String pwd) {
+		// TODO Auto-generated method stub
+		enterUserName(uName);
+		enterPassword(pwd);
+		pressLoginBtn();
+		return  PageFactory.initElements(driver, DemeritsTAndC.class);
+	}
+
 }

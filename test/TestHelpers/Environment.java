@@ -24,6 +24,7 @@ public class Environment {
     private final String CreateAccountPath = "MyServiceNSW/index#/createAccount";
     private final String RMSChangeDetailsPath = "MyServiceNSW/index#/rms/changeDetails";
     private final String CheckRegoDetailsPath = "MyServiceNSW/index#/rms/freeRegoCheck/details";
+    private final String checkDemeritsPath = "MyServiceNSW/index#/rms/demeritPoints";
     private final String loginURL = "MyServiceNSW";
     private final String IT2URL = "https://it2-snsw.cs31.force.com/";
     private final String IT3URL = "https://it3-snsw.cs6.force.com/";
@@ -218,6 +219,28 @@ public class Environment {
             FileUtils.copyFile(scrFile, new File(filename));
         } catch (IOException e) {
             System.out.println(e.getStackTrace());
+        }
+    }
+    
+    public String getCheckDemeritURL() {
+        switch(this.currentEnvironment) {
+            case LTCS5:
+                return LoadTestURLCS5 + checkDemeritsPath;
+                
+            case LTCS6:
+                return LoadTestURLCS6 + checkDemeritsPath;
+            
+            case IT2:
+                return IT2URL + checkDemeritsPath;
+             
+            case IT3:
+                return IT3URL + checkDemeritsPath;
+                
+            case PSM:
+                return PSMURL + checkDemeritsPath;     
+                
+            default:
+                return null;
         }
     }
     
