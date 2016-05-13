@@ -1,5 +1,7 @@
 package r1regression;
 
+import static org.testng.AssertJUnit.assertTrue;
+
 import java.io.IOException;
 
 import org.openqa.selenium.support.PageFactory;
@@ -10,6 +12,7 @@ import SNSWWebPages.LicenceDetailsOptionBPage;
 import SNSWWebPages.LicenceDetailsOptionCPage;
 import SNSWWebPages.LoginPage;
 import SNSWWebPages.MyServicesPage;
+import SNSWWebPages.RMSLinkSucessMsgPage;
 import SNSWWebPages.ServiceNSWDashboardPage;
 import TestHelpers.Utilities;
 
@@ -38,16 +41,11 @@ public class RMSLinkingOptionATest extends R1RegressionTestBase{
 	LicenceDetailsOptionAPage licDetailsA =licDetailsC.pressTrylinkingOptionA();
 	
 	//	Enter Card Number and Password,Terms and Condition and Next Button
-	licDetailsA.enterRtaLicDetails(data[3], data[4]);
-	licDetailsA.ClickRtaTermsAndConditions();
-	
-	//Assert Success Message
-	
-	
-	
-	
-	
-	
+	RMSLinkSucessMsgPage linkSucessMsg = licDetailsA.enterRtaLicDetails(data[3], data[4]);
 
-}
+	//Assert Success Message	
+	linkSucessMsg.explicitFluentWait(linkSucessMsg.SucessLinkLicenceDetailsMsg);
+	assertTrue(linkSucessMsg.isElementExist(linkSucessMsg.SucessLinkLicenceDetailsMsg));
+	
+ }
 }

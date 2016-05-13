@@ -12,12 +12,13 @@ public class LicenceDetailsOptionCPage extends DriverPage {
 		// TODO Auto-generated constructor stub
 	}
 	
-	//click Try linking another way option A
+	//click Try linking another way for option A
 		@FindBy(xpath="//a[text()='Try linking another way.']")
 		private WebElement TryAnotherLink;
 		
 		public LicenceDetailsOptionAPage pressTrylinkingOptionA()
 		{
+			explicitFluentWait(TryAnotherLink);
 			TryAnotherLink.click();
 			return PageFactory.initElements(driver, LicenceDetailsOptionAPage.class);
 			
