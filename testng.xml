@@ -12,6 +12,7 @@
      	<class name="r1regression.FeedBackTest"/>
     	 <class name="r1regression.UpdateSecurityQTest"/>
     	 <class name="r1regression.CheckDemeritsTest"/>
+    	 <class name="r1regression.LinkingOptionCTest"/>
      </classes>
   </test>
 

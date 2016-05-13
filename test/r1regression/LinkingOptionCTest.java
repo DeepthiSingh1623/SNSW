@@ -14,7 +14,9 @@ import SNSWWebPages.LoginPage;
 import SNSWWebPages.ManageRMSPage;
 import SNSWWebPages.MyServicesPage;
 import SNSWWebPages.RMSLinkSucessMsgPage;
+import SNSWWebPages.RMSUnlinkSucessPage;
 import SNSWWebPages.ServiceNSWDashboardPage;
+import SNSWWebPages.VerifyPassword;
 import TestHelpers.Utilities;
 
 public class LinkingOptionCTest extends R1RegressionTestBase{
@@ -54,6 +56,16 @@ public class LinkingOptionCTest extends R1RegressionTestBase{
 		Assert.assertEquals(manageRMS.ResAddress.getText(),data[12]);
 		manageRMS.explicitFluentWait(manageRMS.MailAddres);
 		Assert.assertEquals(manageRMS.MailAddres.getText(),data[13]);
+		
+		//Click on Unlink Link
+				VerifyPassword VerifyPass = manageRMS.unlinkRMS();
+				
+				//Enter Password and Verify
+				RMSUnlinkSucessPage unlinkSucess = VerifyPass.EnterPwdUnink(data[2]);
+				
+				//Verifying the Successfully UnLinked  Message
+				unlinkSucess.explicitFluentWait(unlinkSucess.UnlinkSucessMsg);
+				assertTrue(unlinkSucess.isElementExist(unlinkSucess.UnlinkSucessMsg));
 		
   }
 }
