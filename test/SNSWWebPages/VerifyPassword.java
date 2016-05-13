@@ -11,7 +11,7 @@ public class VerifyPassword extends DriverPage{
 		super(driver);
 		// TODO Auto-generated constructor stub
 	}
-
+	//Verify Re-enter Password
 	@FindBy(xpath="//input[@id='password']")
 	private WebElement password;
 	
@@ -21,6 +21,7 @@ public class VerifyPassword extends DriverPage{
 		
 	}
 	
+	//Verify Button Edit Questions 
 	@FindBy(xpath="//*[text()='Verify']")
 	private WebElement VerifyBtn;
 	
@@ -30,6 +31,18 @@ public class VerifyPassword extends DriverPage{
 		enterPassword(pwd);
 		VerifyBtn.click();
 		return PageFactory.initElements(driver, EditSecurityQuestionsPage.class); 
+	}
+	
+	//Verify Pwd and unlink button
+	@FindBy(xpath="//button[contains(text(),'Unlink')]")
+	private WebElement VerifyUnlinkBtn;
+	
+	public RMSUnlinkSucessPage EnterPwdUnink(String pwd)
+	{
+		explicitFluentWait(password);
+		enterPassword(pwd);
+		VerifyUnlinkBtn.click();
+		return PageFactory.initElements(driver, RMSUnlinkSucessPage.class); 
 	}
 	
 	

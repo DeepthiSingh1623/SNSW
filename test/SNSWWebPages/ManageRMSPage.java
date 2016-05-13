@@ -13,21 +13,27 @@ public class ManageRMSPage extends DriverPage {
 	}
 
 	@FindBy(id="residentialAddress")
-	private WebElement ResAddress;
+	public WebElement ResAddress;
 	
 	@FindBy(id="mailingAddress")
-	private WebElement MailAddres;
+	public WebElement MailAddres;
 	
+	//Click Unlink Button on the RMS Manage Screen
 	@FindBy(xpath="//a[text()='Unlink']")
 	private WebElement UnlinkBtn;
 	
-	public ManageRMSPage PressRMSUnlinkBtn()
-	{
-		explicitFluentWait(UnlinkBtn);
-		UnlinkBtn.click();
-		return PageFactory.initElements(driver, ManageRMSPage.class);
-	}
+	@FindBy(xpath="//button[contains(text(),'Yes')]")
+	private WebElement UnlinkYesBtn;
 	
+	public VerifyPassword unlinkRMS() {
+		 	UnlinkBtn.click();
+		   explicitFluentWait( driver.switchTo().activeElement());
+		   driver.switchTo().activeElement();
+		    UnlinkYesBtn.click();
+		    driver.switchTo().defaultContent();
+		    return PageFactory.initElements(driver, VerifyPassword.class);
+	    }
+	    
 	
 			
 			

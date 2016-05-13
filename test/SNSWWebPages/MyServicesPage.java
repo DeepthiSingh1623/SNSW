@@ -13,15 +13,28 @@ public class MyServicesPage extends DriverPage
 		// TODO Auto-generated constructor stub
 	}
 	
+	//Click Connect Button 	
 	@FindBy(xpath="//a[@href='#/linkRMSProvideLicenseDetails']")
 	private WebElement connectBtn;
 	
-	public LicenceDetailsPage PressRMSConnectBtn()
+	public LicenceDetailsOptionBPage PressRMSConnectBtn()
 	{
 		explicitFluentWait(connectBtn);
 		connectBtn.click();
-		return PageFactory.initElements(driver, LicenceDetailsPage.class);
+		return PageFactory.initElements(driver, LicenceDetailsOptionBPage.class);
 	}
+	
+	//Click Manage Button
+	@FindBy(xpath="//a[text()='Manage']")
+	private WebElement RMSManageBtn;
+	
+	public ManageRMSPage PressRMSManageBtn()
+	{
+		explicitFluentWait(RMSManageBtn);
+		RMSManageBtn.click();
+		return PageFactory.initElements(driver, ManageRMSPage.class);
+	}
+	
 	
 
 }
