@@ -1,5 +1,12 @@
 /dist/
 *.class
 results/
-drivers/
-test-output/
+/bin/
+
+/lib/
+/nbproject/
+/target/
+/test-output/
+*.project
+*.classpath
+manifest.mf/

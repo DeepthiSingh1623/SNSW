@@ -61,7 +61,7 @@ public class R1RegressionTestBase {
 			else if(Browser.equalsIgnoreCase("ie")){
 				//DesiredCapabilities capabilities = DesiredCapabilities.internetExplorer();
 				//capabilities.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, true);
-				System.setProperty("webdriver.ie.driver" , "drivers\\IEDriverServer_x64_2.45.0\\IEDriverServer.exe");
+				System.setProperty("webdriver.ie.driver" , "drivers\\iedriver\\IEDriverServer.exe");
 				driver =  new InternetExplorerDriver();
 			}
 			

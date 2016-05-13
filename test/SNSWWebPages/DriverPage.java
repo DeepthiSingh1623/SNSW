@@ -6,6 +6,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 public class DriverPage {
@@ -14,7 +15,7 @@ public class DriverPage {
 	public DriverPage(WebDriver driver)
 	{
 		this.driver=driver;   
-		System.out.println("Driver title from super class:"+driver.getCurrentUrl());
+		//System.out.println("Driver title from super class:"+driver.getCurrentUrl());
 		
 	} 
 
@@ -71,6 +72,21 @@ public String getGlobalErrorMsgText() {
 		
 		return driver.findElement(By.xpath("//div[@class='alert alert-danger alert-with-icon alert-validation-summary']")).getText();
 	}
+
+@FindBy(xpath="/html/body/div[2]/div[1]/div/div[1]/div[3]/ul/li[8]/a")
+private WebElement logoutLink;
+
+@FindBy(xpath="//button[text()='Log out']")
+private WebElement logoutPbtn;
+
+public void pressLogoutButton() throws InterruptedException {
+	logoutLink.click();
+    Thread.sleep(2000);
+    driver.switchTo().activeElement();
+    logoutPbtn.click();
+    driver.switchTo().defaultContent();
+    Thread.sleep(5000);
+}
 
 	
 }

@@ -32,13 +32,16 @@ public class ServiceNSWDashboardPage extends DriverPage{
     @FindBy(xpath="/html/body/div[2]/div[1]/div/div[1]/div[3]/ul/li[8]/a")
     private WebElement logoutLink;
     
-    @FindBy(xpath="/html/body/div[4]/div/div/div/div[3]/button[1]")
+    @FindBy(xpath="//button[text()='Log out']")
     private WebElement logoutPbtn;
     
     public void pressLogoutButton() throws InterruptedException {
     	logoutLink.click();
-        Thread.sleep(1000);
-        logoutPbtn.click();
+	    Thread.sleep(2000);
+	    driver.switchTo().activeElement();
+	    logoutPbtn.click();
+	    driver.switchTo().defaultContent();
+	    Thread.sleep(5000);
     }
     
   //Deepthi adding Feedback Button
@@ -60,5 +63,16 @@ public class ServiceNSWDashboardPage extends DriverPage{
     	explicitFluentWait(SettingsTab);
     	SettingsTab.click();
     	return PageFactory.initElements(driver, SettingsPage.class);
+    }
+    
+    //DS - My Services tab 
+    @FindBy(xpath="//a[text()='My services']")
+    private WebElement myServicesTab;
+    
+    public MyServicesPage pressmyServicesTab()
+    {
+    	explicitFluentWait(myServicesTab);
+    	myServicesTab.click();
+    	return PageFactory.initElements(driver, MyServicesPage.class);
     }
 }

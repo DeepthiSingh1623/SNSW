@@ -2,14 +2,15 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="SNSWAutomationSuite">
  <parameter name="Env"  value="IT2"/>  
- <parameter name="Browser"  value="IE"/>
+ <parameter name="Browser"  value="Chrome"/>
 <listeners>
 	<listener class-name="TestHelpers.Screenshot" /> 
  </listeners>   
  
  <test name="R1.1 Regression">
     <classes>
-    	 <class name="r1regression.SNSWFeedBackTest"/>
+     		<class name="r1regression.SNSWFeedBackTest"/>
+    	 <class name="r1regression.SNSWUpdateSecurityQTest"/>
      </classes>
   </test>
 
