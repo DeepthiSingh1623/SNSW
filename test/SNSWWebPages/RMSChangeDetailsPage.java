@@ -10,6 +10,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Wait;
 
@@ -17,7 +19,7 @@ import org.openqa.selenium.support.ui.Wait;
  *
  * @author Kurt
  */
-public class RMSChangeDetailsPage {
+public class RMSChangeDetailsPage extends DriverPage{
     
     
     private static final String weNextButton = "//input[@class='pull-right btn btn-primary ng-scope'][@type='submit'][@value='Next']";
@@ -29,12 +31,36 @@ public class RMSChangeDetailsPage {
 
     
     
-    private final WebDriver driver;
+    //private final WebDriver driver; DS - Commented on 16 May 2016
     
-    
-    public RMSChangeDetailsPage(WebDriver driver) {
+    //DS - Commented on 16 May 2016
+    /*public RMSChangeDetailsPage(WebDriver driver) {
         this.driver = driver;
-    }
+    }*/ 
+    
+   //DS - Added the below constructor
+    public RMSChangeDetailsPage(WebDriver driver) {
+		super(driver);
+		// TODO Auto-generated constructor stub
+	}
+    
+    //DS - Change Button
+	@FindBy(xpath = "html/body/div[2]/div[2]/div/div[2]/div[2]/a")
+	private WebElement AddressChangeBtn;
+	
+	public void pressAddressChange()
+	{
+		AddressChangeBtn.click();
+	}
+	
+	    
+	public SelectOptionAddressChange pressAddressChangebtn()
+	{
+		explicitFluentWait(AddressChangeBtn);
+		pressAddressChange();
+		return PageFactory.initElements(driver,SelectOptionAddressChange.class);
+	}
+
     
     
     public void waitForElements(Wait<WebDriver> wait) {
@@ -107,6 +133,10 @@ public class RMSChangeDetailsPage {
         }  catch (NoSuchElementException e) {
             System.out.println(e.getStackTrace());
             return false;
+            
+            
+          
+
         }
     }
 }

@@ -15,11 +15,40 @@ public class TransAuthentication extends DriverPage{
 	@FindBy(xpath="//button[text()='Login']")
 	public WebElement loginBtn;
 	
+	@FindBy(xpath="//span[text()='Continue as guest']")
+	private WebElement loginAsGuestBtn;
+	
+	public void LoginBtn()
+	{
+		loginBtn.click();
+	}
+	
 	public LoginPage pressLoginBtn(){
 		explicitFluentWait(loginBtn);
-		loginBtn.click();
+		LoginBtn();
 		return PageFactory.initElements(driver, LoginPage.class);
 	}
+	
+
+	public SelectOptionAddressChange pressLoginBtnRedirects(){
+		explicitFluentWait(loginBtn);
+		LoginBtn();
+		return PageFactory.initElements(driver, SelectOptionAddressChange.class);
+	}
+	
+	public void GuestBtn()
+	{
+		loginAsGuestBtn.click();
+	}
+	
+	public GuestLoginOptionBLicDetails pressContAsGuestBtn(){
+		explicitFluentWait(loginAsGuestBtn);
+		GuestBtn();
+		return PageFactory.initElements(driver, GuestLoginOptionBLicDetails.class);
+	}
+	
+	
+	
 	
 
 }

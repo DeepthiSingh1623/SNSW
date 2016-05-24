@@ -2,17 +2,18 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="SNSWAutomationSuite">
  <parameter name="Env"  value="IT2"/>  
- <parameter name="Browser"  value="Chrome"/>
+ <parameter name="Browser"  value="firefox"/>
 <listeners>
 	<listener class-name="TestHelpers.Screenshot" /> 
  </listeners>   
  
  <test name="R1.1 Regression">
     <classes>
-     	<class name="r1regression.FeedBackTest"/>
-    	 <class name="r1regression.UpdateSecurityQTest"/>
-    	 <class name="r1regression.CheckDemeritsTest"/>
-    	 <class name="r1regression.LinkingOptionCTest"/>
+     	
+         
+ 	    
+         <class name="r1regression.CheckDemeritsTest"/>
+        
      </classes>
   </test>
 

@@ -31,13 +31,13 @@ public class CheckDemeritsTest extends R1RegressionTestBase{
 		assertTrue(dmPage.pageTitle.isDisplayed());
 		assertTrue(dmPage.pointTable.getText().contains("Licence class C: CAR UNRESTRICTED"));
 		assertTrue(dmPage.pointTable.getText().contains("Class C has a maximum of 13 demerit points"));
-		assertTrue(dmPage.pointTable.getText().contains("Licence class R: UNRESTRICTED RIDER OF CYCLE"));
-		assertTrue(dmPage.pointTable.getText().contains("Class R has a maximum of 13 demerit points"));
+		//assertTrue(dmPage.pointTable.getText().contains("Licence class R: UNRESTRICTED RIDER OF CYCLE"));
+		//assertTrue(dmPage.pointTable.getText().contains("Class R has a maximum of 13 demerit points"));
 		assertTrue(dmPage.pointTable.getText().contains("Total demerit points:"));
 		
 		
 		assertTrue(dmPage.getDemeritPointsForSingleLicence().contains("0"));
-		assertTrue(dmPage.getDemeritPointsForSecondInDualLicence().contains("0"));
+		//assertTrue(dmPage.getDemeritPointsForSecondInDualLicence().contains("0"));
 		
 		dmPage.pressFinishBtn();
 		

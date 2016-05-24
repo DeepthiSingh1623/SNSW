@@ -11,7 +11,7 @@ public class ManageRMSPage extends DriverPage {
 		super(driver);
 		// TODO Auto-generated constructor stub
 	}
-
+	
 	@FindBy(id="residentialAddress")
 	public WebElement ResAddress;
 	
@@ -33,7 +33,8 @@ public class ManageRMSPage extends DriverPage {
 		    driver.switchTo().defaultContent();
 		    return PageFactory.initElements(driver, VerifyPassword.class);
 	    }
-	    
+	
+	
 	
 			
 			
